@@ -1,0 +1,32 @@
+{
+  "name": "admin-lite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 8080",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@cool-vue/crud": "^5.3.1",
+    "@element-plus/icons-vue": "^2.0.6",
+    "@vueuse/core": "^8.9.4",
+    "axios": "^0.27.2",
+    "element-plus": "^2.2.10",
+    "loadsh": "^0.0.4",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.0.16",
+    "store": "^2.0.12",
+    "unocss": "^0.44.7",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.2"
+  },
+  "devDependencies": {
+    "@unocss/preset-uno": "^0.44.7",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "@vitejs/plugin-vue-jsx": "^2.0.0",
+    "sass": "^1.54.0",
+    "vite": "^3.0.0"
+  }
+}
