@@ -9,14 +9,15 @@ function resolve(dir) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: "/",
   plugins: [
     vue(),
     vueJsx()
   ],
   resolve: {
     alias: {
-      '@': resolve('src')
+      "/@": resolve("src"),
+      "/$": resolve("src/modules")
     },
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"]
   }

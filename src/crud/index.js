@@ -1,11 +1,11 @@
 import * as components from "./components";
-import { useStore } from "../store";
+import { useBase } from "/$/base";
 
 import "./assets/index.scss";
 
 const CRUD = {
   install(Vue, options) {
-    const { app } = useStore();
+    const { app } = useBase();
 
     Vue.provide("app", app);
 

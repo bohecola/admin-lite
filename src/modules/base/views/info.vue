@@ -38,12 +38,12 @@
 <script name="my-info" setup>
 import { ElMessage } from "element-plus";
 import { reactive, ref } from "vue";
-import { useStore } from "@/store";
-import { useCool } from "@/hook";
+import { useBase } from "/$/base";
+import { useCool } from "/@/cool";
 import { cloneDeep } from "lodash";
 
 const { service } = useCool();
-const { user } = useStore();
+const { user } = useBase();
 
 const fileList = ref([]);
 const dialogImageUrl = ref("");
