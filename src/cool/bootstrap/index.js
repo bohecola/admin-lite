@@ -5,8 +5,9 @@ import { router } from "../router";
 import ElementPlus from "element-plus";
 import ElIcons from "../../el-icons";
 import "element-plus/dist/index.css";
-import Crud from "@cool-vue/crud";
-import "@cool-vue/crud/dist/index.css";
+// import Crud from "@cool-vue/crud";
+// import "@cool-vue/crud/dist/index.css";
+import Crud from "../../crud";
 import { Loading } from "../utils";
 
 export async function bootstrap(app) {

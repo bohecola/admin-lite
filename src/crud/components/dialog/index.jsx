@@ -1,5 +1,6 @@
 import { computed, defineComponent, h, inject, ref, watch } from "vue";
 import { isBoolean, isArray } from "loadsh";
+import { renderNode } from "../../utils/vnode";
 
 export default defineComponent({
   name: "cl-dialog",
@@ -214,6 +215,10 @@ export default defineComponent({
                     <el-icon><Close /></el-icon>
                   </button>
                 );
+              } else {
+                return renderNode(vnode, {
+                  slots: ctx.$slots
+                });
               }
             })}
           </div>
