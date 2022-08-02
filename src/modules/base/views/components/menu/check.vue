@@ -1,0 +1,104 @@
+<template>
+	<div class="menu-check">
+		<el-input v-model="keyword" placeholder="输入关键字进行过滤" />
+
+		<div class="menu-check__scroller scroller1">
+			<el-tree
+				ref="Tree"
+				node-key="id"
+				show-checkbox
+				:data="list"
+				:props="{
+					label: 'name',
+					children: 'children'
+				}"
+				:default-checked-keys="checked"
+				:filter-node-method="filterNode"
+				@check="onCheckChange"
+			/>
+		</div>
+	</div>
+</template>
+
+<script name="menu-check" setup>
+import { onMounted, ref, watch } from "vue";
+import { ElMessage } from "element-plus";
+import { deepTree } from "/@/cool/utils";
+import { useCool } from "/@/cool";
+
+const props = defineProps({
+	modelValue: {
+		type: Array,
+		default: () => []
+	}
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+const { service } = useCool();
+
+// 树形列表
+const list = ref([]);
+
+// 已选列表
+const checked = ref([]);
+
+// 搜索关键字
+const keyword = ref("");
+
+// el-tree 组件
+const Tree = ref();
+
+// 刷新列表
+function refresh() {
+	service.menu
+		.list()
+		.then((res) => {
+			list.value = deepTree(res);
+		})
+		.catch((err) => {
+			ElMessage.error(err.message);
+		});
+}
+
+// 过滤节点
+function filterNode(val, data) {
+	if (!val) return true;
+	return data.name.includes(val);
+}
+
+// 值改变
+function onCheckChange(_, { checkedKeys, halfCheckedKeys }) {
+	emit("update:modelValue", [...checkedKeys, ...halfCheckedKeys]);
+}
+
+// 过滤监听
+watch(keyword, (val) => {
+	Tree.value.filter(val);
+});
+
+// 刷新监听
+watch(
+	() => props.modelValue,
+	(val) => {
+		checked.value = (val || []).filter((e) => Tree.value.getNode(e)?.isLeaf);
+	}
+);
+
+onMounted(() => {
+	refresh();
+});
+</script>
+
+<style lang="scss" scoped>
+.menu-check {
+	&__scroller {
+		border: 1px solid var(--el-border-color);
+		border-radius: 3px;
+		max-height: 200px;
+		box-sizing: border-box;
+		margin-top: 10px;
+		padding: 5px 0;
+	}
+}
+</style>

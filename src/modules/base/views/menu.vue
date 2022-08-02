@@ -1,17 +1,21 @@
 <template>
-            <!-- ('crud') => (el) => { refs.value['crud'] = el; } -->
-            <!-- (index) => (el) => { refs.value[index] = el; } -->
-  <cl-crud :ref="setRefs('crud')" :on-refresh="onRefresh" @load="onLoad">
+  <cl-crud ref="Crud">
+    <el-row>  
+			<cl-refresh-btn />
+      <cl-add-btn />
+		</el-row>
+
     <el-row>
-			<cl-table :ref="setRefs('table')" v-bind="table" @row-click="onRowClick">
+			<cl-table ref="Table" row-key="id" @row-click="onRowClick">
 				<!-- 名称 -->
 				<template #column-name="{ scope }">
 					<span>{{ scope.row.name }}</span>
 					<el-tag
-						size="small"
+						v-if="!scope.row.isShow"
 						effect="dark"
 						type="danger"
-						v-if="!scope.row.isShow"
+						size="small"
+            disable-transitions
 						style="margin-left: 10px"
 						>隐藏</el-tag
 					>
@@ -29,8 +33,8 @@
 					<el-tag
 						v-for="(item, index) in scope.row.permList"
 						:key="index"
+            effect="plain"
 						size="small"
-						effect="dark"
 						style="margin: 2px; letter-spacing: 0.5px"
 						>{{ item }}</el-tag
 					>
@@ -38,7 +42,7 @@
 
 				<!-- 路由 -->
 				<template #column-router="{ scope }">
-					<el-link type="primary" :href="scope.row.router" v-if="scope.row.type == 1">{{
+					<el-link v-if="scope.row.type == 1" type="success" :href="scope.row.router">{{
 						scope.row.router
 					}}</el-link>
 					<span v-else>{{ scope.row.router }}</span>
@@ -46,94 +50,82 @@
 
 				<!-- 路由缓存 -->
 				<template #column-keepAlive="{ scope }">
-					<template v-if="scope.row.type == 1">
-						<el-icon v-if="scope.row.keepAlive">
-              <Check />
-            </el-icon>
-						<el-icon v-else><Close /></el-icon>
-					</template>
+          <el-icon v-if="scope.row.type == 1">
+            <Check v-if="scope.row.keepAlive" />
+            <Close v-else />
+          </el-icon>
+          <span v-else></span>
 				</template>
 
 				<!-- 行新增 -->
 				<template #slot-add="{ scope }">
 					<el-button
-						link
-            type="primary"
-						size="small"
+						type="success"
+						text
+						bg
 						v-if="scope.row.type != 2"
+            @click="append(scope.row)"
 						>新增</el-button
 					>
 				</template>
 			</cl-table>
 		</el-row>
+
+    <el-row>
+			<cl-flex1 />
+			<cl-pagination layout="total" />
+		</el-row>
+
+    <!-- 新增、编辑 -->
+		<cl-upsert ref="Upsert">
+			<template #slot-parentId="{ scope }">
+				<menu-select v-model="scope.parentId" :type="scope.type" />
+			</template>
+		</cl-upsert>
   </cl-crud>
-  <!-- <cl-dialog
-    v-model="visible"
-  >
-  </cl-dialog> -->
 </template>
 
-<script setup>
-import { service, useRefs } from "/@/cool";
+<script name="sys-menu" setup>
+import { useCrud, useTable, useUpsert } from "@cool-vue/crud";
+import { useCool } from "/@/cool";
 import { deepTree } from "/@/cool/utils";
-import { onMounted, reactive, ref } from "vue";
+import MenuSelect from "./components/menu/select.vue";
+import MenuFile from "./components/menu/file.vue";
+import MenuPerms from "./components/menu/perms.vue";
+import IconSelect from "./components/menu/icon.vue";
 
-const { refs, setRefs } = useRefs();
+const { service } = useCool();
 
-function onLoad({ ctx, app }) {
-  ctx.service(service.menu).done();
-  app.refresh();
-}
+// cl-crud 配置
+const Crud = useCrud(
+	{
+		service: service.menu,
+		onRefresh(_, { render }) {
+			service.menu.list().then((list) => {
+				list.map((e) => {
+					e.permList = e.perms ? e.perms.split(",") : [];
+				});
 
-// 刷新监听
-function onRefresh(_, { render }) {
-  service.menu.list().then((list) => {
-    list.map(e => {
-      e.permList = e.perms ? e.perms.split(",") : [];
-    });
-
-    render(deepTree(list), {
-      total: list.length
-    });
-  });
-}
+				render(deepTree(list), {
+          total: list.length
+        });
+			});
+		}
+	},
+	(app) => {
+		app.refresh();
+	}
+);
 
 // 行点击展开
 function onRowClick(row, column) {
   if (column.property && row.children) {
-    refs.value.table.toggleRowExpansion(row);
+    Table.value.toggleRowExpansion(row);
   }
 }
 
-// 表格配置
-const table = reactive({
-  props: {
-    "row-key": "id"
-  },
-  "context-menu": [
-    (row) => {
-      return {
-        label: "新增",
-        hidden: row.type == 2,
-        callback: (_, done) => {
-          upsertAppend(row);
-          done();
-        }
-      };
-    },
-    "update",
-    "delete",
-    (row) => {
-      return {
-        label: "权限",
-        hidden: row.type != 1,
-        callback: (_, done) => {
-          setPermission(row);
-          done();
-        }
-      };
-    }
-  ],
+// cl-table 配置
+const Table = useTable({
   columns: [
     {
       prop: "name",
@@ -157,11 +149,13 @@ const table = reactive({
         },
         {
           label: "菜单",
-          value: 1
+          value: 1,
+          type: "success"
         },
         {
           label: "权限",
-          value: 2
+          value: 2,
+          type: "danger"
         }
       ]
     },
@@ -196,15 +190,150 @@ const table = reactive({
       prop: "updatedAt",
       label: "更新时间",
       sortable: "custom",
-      width: 150
+      width: 160
     },
     {
       label: "操作",
       type: "op",
+      width: 250,
       buttons: ["slot-add", "edit", "delete"]
     }
   ]
 });
 
-const visible = ref(true);
+// cl-upsert 配置
+const Upsert = useUpsert({
+  dialog: {
+    width: "800px"
+  },
+  items: [
+    {
+      prop: "type",
+      value: 0,
+      label: "节点类型",
+      required: true,
+      component: {
+        name: "el-radio-group",
+        options: [
+          {
+            label: "目录",
+            value: 0
+          },
+          {
+            label: "菜单",
+            value: 1
+          },
+          {
+            label: "权限",
+            value: 2
+          }
+        ]
+      }
+    },
+    {
+      prop: "name",
+      label: "节点名称",
+      component: {
+        name: "el-input"
+      },
+      required: true,
+    },
+    {
+      prop: "parentId",
+      label: "上级节点",
+      component: {
+        name: "slot-parentId"
+      }
+    },
+    {
+      prop: "router",
+      label: "节点路由",
+      hidden: ({ scope }) => scope.type != 1,
+      component: {
+        name: "el-input",
+        props: {
+          placeholder: "请输入节点路由，如：/test"
+        }
+      }
+    },
+    {
+      prop: "keepAlive",
+      value: true,
+      label: "路由缓存",
+      hidden: ({ scope }) => scope.type != 1,
+      component: {
+        name: "el-radio-group",
+        options: [
+          {
+            label: "开启",
+            value: true
+          },
+          {
+            label: "关闭",
+            value: false
+          }
+        ]
+      }
+    },
+    {
+      prop: "isShow",
+      label: "是否显示",
+      value: true,
+      hidden: ({ scope }) => scope.value == 2,
+      flex: false,
+      component: {
+        name: "el-switch"
+      }
+    },
+    {
+      prop: "viewPath",
+      label: "文件路径",
+      hidden: ({ scope }) => scope.type != 1,
+      	component: {
+				vm: MenuFile
+			}
+    },
+    {
+      prop: "icon",
+			label: "节点图标",
+			hidden: ({ scope }) => scope.type == 2,
+			component: {
+				vm: IconSelect
+			}
+    },
+		{
+			prop: "orderNum",
+			label: "排序号",
+			component: {
+				name: "el-input-number",
+				props: {
+					placeholder: "请填写排序号",
+					min: 0,
+					max: 99,
+					"controls-position": "right"
+				}
+			}
+		},
+    {
+			prop: "perms",
+			label: "权限",
+			hidden: ({ scope }) => scope.type != 2,
+			component: {
+				vm: MenuPerms
+			}
+		}
+  ]
+});
+
+// 子级新增
+function append({ type, id }) {
+  Crud.value.rowAppend({
+    parentId: id,
+    parentType: type,
+    type: type + 1,
+    keepAlive: true,
+    isShow: true
+  });
+}
+
 </script>

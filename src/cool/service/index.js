@@ -1,10 +1,13 @@
 const files = import.meta.globEager('../api/**/*.js');
 
 export const service = Object.keys(files).reduce((prev, path) => {
+
   const m = {};
 
-  for(const i in files[path]) {
-    m[i] = files[path][i];
+  const apis = files[path].default ? files[path].default : files[path];
+
+  for(const i in apis) {
+    m[i] = apis[i];
   }
 
   const filename = path.match(/\w+(?=\.js)/g)[0];

@@ -31,6 +31,37 @@ export function getUrlParam(name) {
 	return null;
 }
 
+// 路径转数组
+export function deepPaths(paths, splitor) {
+	const list = [];
+
+	paths.forEach((e) => {
+		const arr = e.split(splitor || "/").filter(Boolean);
+
+		let c = list;
+
+		arr.forEach((a, i) => {
+			let d = c.find((e) => e.label == a);
+
+			if (!d) {
+				d = {
+					label: a,
+					value: a,
+					children: arr[i + 1] ? [] : null
+				};
+
+				c.push(d);
+			}
+
+			if (d.children) {
+				c = d.children;
+			}
+		});
+	});
+
+	return list;
+}
+
 // 文件路径转对象
 export function deepFiles(list) {
 	const modules = {};
