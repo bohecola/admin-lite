@@ -1,13 +1,13 @@
 import request from "/@/cool/service/request";
 
-export const list = (params) => request({
+export const list = (data) => request({
   url: "/sys/menu/list",
-  method: "get",
-  params
+  method: "post",
+  data
 });
 
-export const page = (params) => request({
+export const page = (data) => request({
   url: "/sys/menu/page",
-  method: "get",
-  params
+  method: "post",
+  data
 });

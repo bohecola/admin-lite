@@ -17,6 +17,7 @@
     "clone-deep": "^4.0.1",
     "element-plus": "^2.2.10",
     "loadsh": "^0.0.4",
+    "merge": "^2.1.1",
     "mitt": "^3.0.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.16",

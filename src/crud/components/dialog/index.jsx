@@ -51,7 +51,7 @@ export default defineComponent({
   emits: ["update:modelValue", "fullscreen-change", "open", "opened", "close", "closed"],
 
   setup(props, { emit }) {
-    const app = inject("app");
+    const browser = inject("browser");
 
     // 是否全屏
     const fullscreen = ref(false);
@@ -64,7 +64,7 @@ export default defineComponent({
 
     // 是否全屏
     const isFullscreen = computed(() => {
-      return app.browser.isMini ? true : fullscreen.value;
+      return browser.isMini ? true : fullscreen.value;
     });
 
     // 对话框内容高度
@@ -156,7 +156,7 @@ export default defineComponent({
   },
 
   render(ctx) {
-    const app = inject("app");
+    const browser = inject("browser");
 
     // 渲染头部
     function renderHeader() {
@@ -171,7 +171,7 @@ export default defineComponent({
               // 全屏按钮
               if (vnode === "fullscreen") {
                 // 隐藏全屏
-                if (app.browser.screen === "xs") {
+                if (browser.screen === "xs") {
                   return null;
                 }
 
