@@ -223,10 +223,10 @@ const Upsert = useUpsert({
             label: "菜单",
             value: 1
           },
-          {
-            label: "权限",
-            value: 2
-          }
+          // {
+          //   label: "权限",
+          //   value: 2
+          // }
         ]
       }
     },

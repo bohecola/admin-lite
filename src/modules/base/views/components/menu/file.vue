@@ -39,7 +39,7 @@ const data = ref(findFiles());
 
 // 值改变
 function onChange(arr) {
-	const v = "modules/" + arr.join("/");
+	const v = arr ? "modules/" + arr.join("/") : arr;
 	emit("update:modelValue", v);
 	emit("change", v);
 }

@@ -8,9 +8,13 @@
 	>
 		<el-row :gutter="10" class="list scroller1">
 			<el-col v-for="(item, index) in list" :key="index" :span="2" :xs="4">
-				<el-button :class="{ 'is-active': item === name }" @click="onChange(item)">
-					<cl-svg :name="item" />
-				</el-button>
+				<el-tooltip
+					:content="item"
+				>
+					<el-button :class="{ 'is-active': item === name }" @click="onChange(item)">
+						<el-icon><component :is="item" /></el-icon>
+					</el-button>
+				</el-tooltip>
 			</el-col>
 		</el-row>
 
@@ -22,12 +26,7 @@
 
 <script name="menu-icon" setup>
 import { ref, watch } from "vue";
-import { basename } from "/@/cool/utils";
-
-// svg 图标加载
-const svgFiles = import.meta.glob("/src/modules/*/static/**/*.svg", {
-	eager: true
-});
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -41,8 +40,8 @@ const props = defineProps({
 function iconList() {
 	const list = [];
 
-	for (const i in svgFiles) {
-		list.push(basename(i).replace(".svg", ""));
+	for (const i in ElementPlusIconsVue) {
+		list.push(i);
 	}
 
 	return list;
