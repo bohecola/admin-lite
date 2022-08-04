@@ -111,6 +111,16 @@ const Upsert = useUpsert({
 
   items: [
 		{
+      prop: "avatar",
+      label: "头像",
+      component: {
+        name: "cl-upload-custom",
+        props: {
+					text: "选择头像"
+        }
+      }
+    },
+		{
 			prop: "name",
 			label: "姓名",
 			span: 12,

@@ -15,3 +15,10 @@ export const permmenu = () => request({
   url: "/comm/permmenu",
   method: "get"
 });
+
+export const upload = (data) => request({
+  url: "/comm/upload",
+  header: { "Content-Type": "multipart/form-data" },
+  method: "post",
+  data
+});

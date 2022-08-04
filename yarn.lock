@@ -276,17 +276,17 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
-"@cool-vue/crud@^5.3.3":
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/@cool-vue/crud/-/crud-5.3.3.tgz#ffadd6cb248325ca015355f2b61012d1aecb398a"
-  integrity sha512-BHHuMaEjU+EFoBwrv/zCWloyGDeGYl1jmVTm+mBZVfSXbXB1nFM9lR5bvotillisrSCA9a+CmzB+aNEcpG0ovg==
+"@cool-vue/crud@^5.3.5":
+  version "5.3.5"
+  resolved "https://registry.yarnpkg.com/@cool-vue/crud/-/crud-5.3.5.tgz#350d7b307ce1d0445b78f179ec2d0f16eb91b99c"
+  integrity sha512-xWwxv2zQCYGt4GqHg1vDEsiv2sGhJCKYKjxDW6hTo5O/oNuzm8uVcWGVGKyYn5y8//F8wcmod4Kk1L/OvdvS5w==
   dependencies:
     array.prototype.flat "^1.2.4"
     core-js "^3.21.1"
-    element-plus "^2.2.11"
+    element-plus "^2.2.12"
     merge "^2.1.1"
     mitt "^3.0.0"
-    vue "^3.2.31"
+    vue "^3.2.37"
 
 "@ctrl/tinycolor@^3.4.1":
   version "3.4.1"
@@ -621,7 +621,7 @@
     "@vue/compiler-core" "3.2.37"
     "@vue/shared" "3.2.37"
 
-"@vue/compiler-sfc@3.2.37", "@vue/compiler-sfc@^3.2.29":
+"@vue/compiler-sfc@3.2.37":
   version "3.2.37"
   resolved "https://registry.yarnpkg.com/@vue/compiler-sfc/-/compiler-sfc-3.2.37.tgz#3103af3da2f40286edcd85ea495dcb35bc7f5ff4"
   integrity sha512-+7i/2+9LYlpqDv+KTtWhOZH+pa8/HnX/905MdVmAcI/mPQOBwkHHIzrsEsucyOIZQYMkXUiTkmZq5am/NyXKkg==
@@ -970,7 +970,7 @@ element-plus@^2.2.10:
     memoize-one "^6.0.0"
     normalize-wheel-es "^1.1.2"
 
-element-plus@^2.2.11:
+element-plus@^2.2.12:
   version "2.2.12"
   resolved "https://registry.yarnpkg.com/element-plus/-/element-plus-2.2.12.tgz#b6c4e298e02ba9b904d70daa54def27b2de8c43c"
   integrity sha512-g/hIHj3b+dND2R3YRvyvCJtJhQvR7lWvXqhJaoxaQmajjNWedoe4rttxG26fOSv9YCC2wN4iFDcJHs70YFNgrA==
@@ -2034,14 +2034,6 @@ update-browserslist-db@^1.0.4:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
-vite-plugin-vue-setup-extend@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-vue-setup-extend/-/vite-plugin-vue-setup-extend-0.4.0.tgz#ebbbe265320039b8c6a3b9fcae3b8d152ecf4a13"
-  integrity sha512-WMbjPCui75fboFoUTHhdbXzu4Y/bJMv5N9QT9a7do3wNMNHHqrk+Tn2jrSJU0LS5fGl/EG+FEDBYVUeWIkDqXQ==
-  dependencies:
-    "@vue/compiler-sfc" "^3.2.29"
-    magic-string "^0.25.7"
-
 vite@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.2.tgz#2a7b4642c53ae066cf724e7e581d6c1fd24e2c32"
@@ -2066,7 +2058,7 @@ vue-router@^4.1.2:
   dependencies:
     "@vue/devtools-api" "^6.1.4"
 
-vue@^3.2.31, vue@^3.2.37:
+vue@^3.2.37:
   version "3.2.37"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.37.tgz#da220ccb618d78579d25b06c7c21498ca4e5452e"
   integrity sha512-bOKEZxrm8Eh+fveCqS1/NkG/n6aMidsI6hahas7pa0w/l7jkbssJVsRhVDs07IdDq7h9KHswZOgItnwJAgtVtQ==

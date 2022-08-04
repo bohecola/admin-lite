@@ -13,7 +13,7 @@
 						v-model="form.username"
 						placeholder="请输入用户名"
 						maxlength="20"
-						auto-complete="off"
+						auto-complete="on"
             :disabled="saving" 
 					/>
         </el-form-item>
