@@ -8,10 +8,10 @@
       :before-upload="beforeUpload"
       :http-request="httpRequest"
       :headers="headers"
-      :multiple="true"
-      :limit="5"
+      :multiple="false"
+      :limit="1"
     >
-      <img v-if="false" src="" class="avatar" />
+      <img v-if="imageUrl" :src="imageUrl" class="avatar" />
       <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
     </el-upload>
   </div>
@@ -21,14 +21,17 @@
 import { defineComponent, ref, reactive, computed, watch } from "vue";
 import { useCool } from "/@/cool";
 import { useBase } from "/$/base";
-import { extname, uuid } from "/@/cool/utils";
 import { ElMessage } from "element-plus";
 
 export default defineComponent({
   name: "cl-upload-custom",
   props: {
-
+    modelValue: {
+      type: [String, Array],
+      default: () => []
+    }
   },
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     const { service } = useCool();
 
@@ -41,6 +44,7 @@ export default defineComponent({
     // 图片大小限制
     const limitSize = props.limitSize || 5;
 
+    // 图片回显
     const imageUrl = ref("");
 
     // 请求头
@@ -59,21 +63,45 @@ export default defineComponent({
       return true;
     }
 
-
+    // 文件上传请求
     async function httpRequest(req) {
+
       const fd = new FormData();
+
+      // 文件名
+      fd.append("key", req.file.name)
 
       // 文件
       fd.append("file", req.file);
 
-      service.comm.upload(fd)
+      service.comm
+        .upload(fd)
         .then((res) => {
-          console.log(res);
+          imageUrl.value = res;
+          update();
         })
         .catch((err) => {
           ElMessage.error(err);
         });
     }
+
+    // 更新
+    function update() {
+      emit("update:modelValue", imageUrl.value)
+    }
+
+    // 获取
+    watch(
+      () => props.modelValue,
+      (val) => {
+        if (typeof val === "string") {
+          imageUrl.value = val;
+        }
+      },
+      {
+        immediate: true
+      }
+    );
 
     return {
       imageUrl,
@@ -105,6 +133,12 @@ export default defineComponent({
       width: 128px;
       height: 128px;
       text-align: center;
+    }
+
+    .avatar {
+      width: 128px;
+      height: 128px;
+      display: block;
     }
   }
 }

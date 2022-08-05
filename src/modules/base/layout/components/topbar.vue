@@ -15,7 +15,7 @@
       <el-dropdown trigger="click" :hide-on-click="false" @command="onCommand">
         <span class="el-dropdown-link">
           <span class="name">{{ user.info.nickName }}</span>
-          <img class="avatar" src="" />
+          <img class="avatar" :src="user.info.avatar" />
         </span>
 
         <template #dropdown>
