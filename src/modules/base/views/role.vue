@@ -104,14 +104,14 @@ const Table = useTable({
       minWidth: 150
     },
     {
-      prop: "createdAt",
-      label: "创建时间",
+      prop: "updatedAt",
+      label: "更新时间",
       sortable: "custom",
       minWidth: 160
     },
     {
-      prop: "updatedAt",
-      label: "更新时间",
+      prop: "createdAt",
+      label: "创建时间",
       sortable: "custom",
       minWidth: 160
     },

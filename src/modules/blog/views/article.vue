@@ -4,8 +4,9 @@
       <cl-refresh-btn />
       <cl-add-btn />
       <cl-multi-delete-btn />
-      <cl-flex1 />
-      <cl-search-key />
+      <cl-filter-group
+        :items="items"
+      />
     </el-row>
 
     <el-row>
@@ -25,13 +26,51 @@
 <script setup>
 import { useCrud, useTable, useUpsert } from "@cool-vue/crud";
 import { useCool } from "/@/cool";
+import { ref } from "vue";
 
 const { service } = useCool();
 
 // cl-crud 配置
 const Crud = useCrud({ service: service.article }, (app) => {
-  app.refresh();
+ app.refresh() 
 });
+
+// cl-filter-group 配置
+const items = ref([
+  {
+    prop: "status",
+    component: {
+      name: "el-select",
+      props: {
+        placeholder: "请选择状态",
+        clearable: true,
+        onChange(status) {
+          Crud.value?.refresh({ status })
+        }
+      },
+      options: [
+        {
+          label: "开启",
+          value: 1
+        },
+        {
+          label: "关闭",
+          value: 0
+        }
+      ]
+    },
+  },
+  {
+    prop: "keyWord",
+    component: {
+      name: "el-input",
+      props: {
+        placeholder: "请输入关键字",
+        clearable: true
+      }
+    },
+  }
+]);
 
 // cl-table 配置
 const Table = useTable({
@@ -46,9 +85,9 @@ const Table = useTable({
       minWidth: 150
     },
     {
-     prop: "slug",
-     label: "标识",
-     minWidth: 150
+      prop: "categoryName",
+      label: "目录",
+      minWidth: 150
     },
     {
       prop: "status",

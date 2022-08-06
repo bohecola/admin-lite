@@ -61,13 +61,12 @@ const Table = useTable({
 // cl-upsert 配置
 const Upsert = useUpsert({
   dialog: {
-    width: "800px"
+    width: "600px"
   },
   items: [
     {
       prop: "name",
       label: "标签名",
-      span: 12,
       required: true,
       component: {
         name: "el-input"
