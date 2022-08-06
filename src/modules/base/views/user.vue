@@ -25,7 +25,6 @@
 
 <script setup>
 import { useTable, useUpsert, useCrud } from "@cool-vue/crud";
-import { computed, reactive } from "vue";
 import { useCool } from "/@/cool";
 
 const { service } = useCool();
@@ -210,17 +209,17 @@ const Upsert = useUpsert({
 		{
 			prop: "status",
 			label: "状态",
-			value: 1,
+			value: true,
 			component: {
 				name: "el-radio-group",
 				options: [
 					{
 						label: "开启",
-						value: 1
+						value: true
 					},
 					{
 						label: "关闭",
-						value: 0
+						value: false
 					}
 				]
 			}
