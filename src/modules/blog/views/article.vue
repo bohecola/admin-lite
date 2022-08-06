@@ -4,9 +4,7 @@
       <cl-refresh-btn />
       <cl-add-btn />
       <cl-multi-delete-btn />
-      <cl-filter-group
-        :items="items"
-      />
+      <cl-filter-group ref="Filter" :items="items" />
     </el-row>
 
     <el-row>
@@ -24,19 +22,54 @@
 </template>
 
 <script setup>
-import { useCrud, useTable, useUpsert } from "@cool-vue/crud";
+import { useCrud, useForm, useTable, useUpsert } from "@cool-vue/crud";
 import { useCool } from "/@/cool";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const { service } = useCool();
+
+// 筛选组件
+const Filter = ref();
+
+onMounted(async() => {
+  const categoryList = await service.category.list();
+
+  // 设置目录列表
+  Filter.value.Form.setOptions(
+    "categoryId",
+    categoryList.map((e) => {
+      return {
+        label: e.name || "",
+        value: e.id
+      };
+    })
+  );
+});
 
 // cl-crud 配置
 const Crud = useCrud({ service: service.article }, (app) => {
  app.refresh() 
 });
 
+const emptyStringToUndefined = (s) => s === "" ? undefined : s;
+
 // cl-filter-group 配置
 const items = ref([
+  {
+    prop: "categoryId",
+    component: {
+      name: "el-select",
+      props: {
+        placeholder: "请选择目录",
+        clearable: true,
+        onChange(categoryId) {
+          categoryId = emptyStringToUndefined(categoryId);
+          Crud.value?.refresh({ categoryId });
+        },
+      },
+      options: []
+    }
+  },
   {
     prop: "status",
     component: {
@@ -45,7 +78,8 @@ const items = ref([
         placeholder: "请选择状态",
         clearable: true,
         onChange(status) {
-          Crud.value?.refresh({ status })
+          status = emptyStringToUndefined(status);
+          Crud.value?.refresh({ status });
         }
       },
       options: [
@@ -66,7 +100,7 @@ const items = ref([
       name: "el-input",
       props: {
         placeholder: "请输入关键字",
-        clearable: true
+        clearable: true,
       }
     },
   }
