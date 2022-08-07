@@ -33,11 +33,23 @@ const Filter = ref();
 
 onMounted(async() => {
   const categoryList = await service.category.list();
+  const tagList = await service.tag.list();
 
   // 设置目录列表
   Filter.value.Form.setOptions(
     "categoryId",
     categoryList.map((e) => {
+      return {
+        label: e.name || "",
+        value: e.id
+      };
+    })
+  );
+
+  // 设置标签列表
+  Filter.value.Form.setOptions(
+    "tagIdList",
+    tagList.map((e) => {
       return {
         label: e.name || "",
         value: e.id
@@ -51,7 +63,7 @@ const Crud = useCrud({ service: service.article }, (app) => {
  app.refresh() 
 });
 
-const emptyStringToUndefined = (s) => s === "" ? undefined : s;
+const emptyStringToUndefined = (s) => s.length !== 0 ? s : undefined;
 
 // cl-filter-group 配置
 const items = ref([
@@ -60,6 +72,7 @@ const items = ref([
     component: {
       name: "el-select",
       props: {
+        style: { width: "120px" },
         placeholder: "请选择目录",
         clearable: true,
         onChange(categoryId) {
@@ -71,10 +84,26 @@ const items = ref([
     }
   },
   {
+    prop: "tagIdList",
+    component: {
+      name: "el-select",
+      props: {
+        style: { width: "180px" },
+        placeholder: "请选择标签",
+        multiple: true,
+        "collapse-tags": true,
+        "collapse-tags-tooltip": true,
+        clearable: true
+      },
+      options: []
+    }
+  },
+  {
     prop: "status",
     component: {
       name: "el-select",
       props: {
+        style: { width: "120px" },
         placeholder: "请选择状态",
         clearable: true,
         onChange(status) {
@@ -99,6 +128,7 @@ const items = ref([
     component: {
       name: "el-input",
       props: {
+        style: { width: "180px" },
         placeholder: "请输入关键字",
         clearable: true,
       }
@@ -121,6 +151,11 @@ const Table = useTable({
     {
       prop: "categoryName",
       label: "目录",
+      minWidth: 150
+    },
+    {
+      prop: "tagNames",
+      label: "标签",
       minWidth: 150
     },
     {
@@ -192,7 +227,6 @@ const Upsert = useUpsert({
         name: "el-select",
         props: {
           multiple: true,
-          "multiple-limit": 3,
           clearable: true
         }
       }
