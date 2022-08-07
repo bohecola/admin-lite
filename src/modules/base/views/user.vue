@@ -47,7 +47,7 @@ const Table = useTable({
       prop: "avatar",
       label: "头像",
       component: {
-        name: "cl-avatar"
+        name: "cl-avatar",
       }
     },
     {

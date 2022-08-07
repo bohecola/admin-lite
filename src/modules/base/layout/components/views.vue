@@ -1,13 +1,27 @@
 <template>
   <div class="app-views">
     <router-view v-slot="{ Component }">
-      <component :is="Component" />
+      <keep-alive :include="caches">
+        <component :is="Component" />
+      </keep-alive>
     </router-view>
   </div>
 </template>
 
 <script setup>
+import { computed } from "vue";
+import { useBase } from "/$/base";
 
+const { process } = useBase();
+
+// 缓存列表
+const caches = computed(() => {
+	return process.list
+		.filter((e) => e.meta?.keepAlive)
+		.map((e) => {
+			return e.path.substring(1, e.path.length).replace(/\//g, "-");
+		});
+});
 </script>
 
 <style lang="scss" scoped>

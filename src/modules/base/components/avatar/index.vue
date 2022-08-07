@@ -1,6 +1,6 @@
 <template>
 	<div class="cl-avatar" :class="[size, shape]" :style="[style]">
-		<el-image :src="src || modelValue" alt="头像">
+		<el-image :src="modelValue || src" alt="头像">
 			<template #error>
 				<div class="image-slot">
 					<el-icon :size="20" :color="color"><user /></el-icon>
