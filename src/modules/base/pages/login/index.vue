@@ -39,15 +39,14 @@
 							@keyup.enter="toLogin"
 						/>
 
-						<!-- <captcha
-							:ref="setRefs("captcha")"
-							v-model="form.captchaId"
+						<captcha
+							:ref="setRefs('captcha')"
 							@change="
 								() => {
-									form.verifyCode = "";
+									form.verifyCode = '';
 								}
 							"
-						/> -->
+						/>
 					</div>
         </el-form-item>
 
@@ -59,66 +58,60 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { defineComponent, reactive, ref } from "vue";
 import { ElMessage } from "element-plus"
 import { useCool } from "/@/cool";
 import { useBase } from "/$/base";
-import Logo from "/@/assets/logo-text.png";
+import Captcha from "./components/captcha.vue";
 
-export default defineComponent({
-  setup() {
-    const form = reactive({
-      username: "",
-      password: "",
+const form = reactive({
+  username: "",
+  password: "",
+  verifyCode: ""
+});
+
+const { refs, setRefs, router, service } = useCool();
+const { user, menu, app } = useBase();
+
+const saving = ref(false);
+
+const toLogin = async () => {
+  if (!form.username) {
+    return ElMessage.error("用户名不能为空");
+  }
+
+  if (!form.password) {
+    return ElMessage.error("密码不能为空");
+  }
+
+  if (!form.verifyCode) {
+    return ElMessage.error("图片验证码不能为空");
+  }
+
+  saving.value = true;
+
+  try {
+    // 登录
+    await service.open.login(form).then((res) => {
+      user.setToken(res);
     });
 
-    const { router, service } = useCool();
-    const { user, menu, app } = useBase();
+    // 用户信息
+    await user.get();
 
-    const saving = ref(false);
+    // 权限菜单
+    await menu.get();
 
-    const toLogin = async () => {
-      if (!form.username) {
-        return ElMessage.error("用户名不能为空");
-      }
+    router.push("/");
 
-      if (!form.password) {
-        return ElMessage.error("密码不能为空");
-      }
-
-      saving.value = true;
-
-      try {
-        // 登录
-        await service.open.login(form).then((res) => {
-          user.setToken(res);
-        });
-
-        // 用户信息
-        await user.get();
-
-        // 权限菜单
-        await menu.get();
-
-        router.push("/");
-
-      } catch(err) {
-        ElMessage.error(err.message);
-      }
-
-      saving.value = false;
-    };
-
-    return {
-      form,
-      saving,
-      toLogin,
-      Logo,
-      app
-    };
+  } catch(err) {
+    refs.value.captcha.refresh();
+    ElMessage.error(err.message);
   }
-})
+
+  saving.value = false;
+};
 </script>
 
 <style lang="scss" scoped>
