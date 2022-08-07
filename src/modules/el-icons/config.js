@@ -8,4 +8,8 @@ const ElIcons = {
   }
 };
 
-export default ElIcons;
+export default () => {
+	return {
+		install: ElIcons.install
+	};
+};
