@@ -7,6 +7,7 @@
     </div>
     <div class="page-layout__right">
       <topbar />
+      <process />
       <views />
     </div>
   </div>
@@ -15,6 +16,7 @@
 <script setup>
 import Topbar from './components/topbar.vue';
 import Slider from './components/slider.vue';
+import process from "./components/process.vue";
 import views from './components/views.vue';
 import { useBase } from '/$/base';
 

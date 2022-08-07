@@ -1,11 +1,16 @@
 <template>
   <div class="app-topbar">
     <div 
-      :class="['app-topbar__collapse', { unfold: !app.isFold }]"
+      :class="['app-topbar__collapse', {
+        unfold: !app.isFold 
+      }]"
       @click="app.fold()"
-      >
+    >
       <el-icon><Fold /></el-icon>
     </div>
+
+    <!-- 路由导航 -->
+		<route-nav />
 
     <div class="flex1"></div>
 
@@ -36,6 +41,7 @@
 <script setup>
 import { useBase } from "/$/base";
 import { useCool } from "/@/cool";
+import RouteNav from "./route-nav.vue";
 
 const { router, service } = useCool();
 const { user, app } = useBase();

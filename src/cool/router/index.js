@@ -155,7 +155,7 @@ async function register(path) {
 // 路由守卫
 router.beforeEach(async (to, from, next) => {
   // 数据缓存
-  const { user } = useBase();
+  const { user, process } = useBase();
 
   // 预先注册路由
 	const { isReg, route } = await register(to.path);
@@ -179,6 +179,7 @@ router.beforeEach(async (to, from, next) => {
           }
         } else {
           // 添加路由进程
+					process.add(to);
         }
       } else {
         // 忽略部分 Token 验证
