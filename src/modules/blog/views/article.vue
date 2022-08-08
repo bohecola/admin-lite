@@ -235,11 +235,7 @@ const Upsert = useUpsert({
       prop: "content",
       label: "内容",
       component: {
-        name: "el-input",
-        props: {
-          type: "textarea",
-          rows: 4
-        }
+        name: "cl-md-editor"
       }
     },
     {
