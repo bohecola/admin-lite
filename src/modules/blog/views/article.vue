@@ -241,7 +241,7 @@ const Upsert = useUpsert({
     {
       prop: "status",
       label: "状态",
-      value: true,
+      value: false,
       component: {
         name: "el-radio-group",
         options: [

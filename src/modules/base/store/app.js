@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { config } from "/@/cool";
 import { deepMerge, getBrowser, storage } from "/@/cool/utils";
 
@@ -14,6 +14,11 @@ export const useAppStore = defineStore("app", function () {
 
   // 是否折叠
   const isFold = ref(browser.value.isMini || false);
+
+  // 事件
+  const events = reactive({
+    hasToken: []
+  });
 
   // 折叠
   function fold(v) {
@@ -35,12 +40,21 @@ export const useAppStore = defineStore("app", function () {
     browser.value = getBrowser();
   }
 
+  // 添加事件
+  function addEvent(name, func) {
+    if (func) {
+      events[name].push(func);
+    }
+  }
+
   return {
     info,
     browser,
     isFold,
+    events,
     fold,
     set,
-    setBrowser
+    setBrowser,
+    addEvent
   };
 });

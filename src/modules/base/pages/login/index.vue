@@ -97,11 +97,8 @@ const toLogin = async () => {
       user.setToken(res);
     });
 
-    // 用户信息
-    await user.get();
-
-    // 权限菜单
-    await menu.get();
+    // token 事件
+    await Promise.all(app.events.hasToken.map((e) => e()));
 
     router.push("/");
 
