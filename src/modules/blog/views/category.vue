@@ -67,7 +67,17 @@ const Upsert = useUpsert({
     {
       prop: "name",
       label: "目录名",
+      span: 12,
       required: true,
+      component: {
+        name: "el-input"
+      }
+    },
+    {
+      prop: "slug",
+      label: "URL-Slug",
+      required: true,
+      span: 12,
       component: {
         name: "el-input"
       }

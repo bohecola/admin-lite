@@ -85,7 +85,7 @@ const Table = useTable({
       minWidth: 150
     },
 		{
-			prop: "remark",
+			prop: "desc",
 			label: "备注",
 			minWidth: 150
 		},

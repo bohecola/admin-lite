@@ -232,6 +232,17 @@ const Upsert = useUpsert({
       }
     },
     {
+      prop: "desc",
+      label: "描述",
+      component: {
+        name: "el-input",
+        props: {
+          type: "textarea",
+          rows: 4
+        }
+      }
+    },
+    {
       prop: "content",
       label: "内容",
       component: {
