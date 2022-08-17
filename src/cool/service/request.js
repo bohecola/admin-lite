@@ -17,8 +17,12 @@ let requests = [];
 // Token 是否刷新中
 let isRefreshing = false;
 
+const baseURL = import.meta.env.MODE === "development"
+  ? 'http://localhost:3000/api/admin'
+  : 'https://canday.site:3000/api/admin';
+
 const service = axios.create({
-  baseURL: 'http://localhost:3000/api/admin',
+  baseURL: baseURL,
   withCredentials: true,
   timeout: 5000
 });

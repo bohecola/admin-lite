@@ -87,7 +87,8 @@ const Table = useTable({
 		{
 			prop: "desc",
 			label: "备注",
-			minWidth: 150
+			minWidth: 150,
+			showOverflowTooltip: true
 		},
 		{
 			prop: "createdAt",
@@ -196,7 +197,7 @@ const Upsert = useUpsert({
 			}
 		},
 		{
-			prop: "remark",
+			prop: "desc",
 			label: "备注",
 			component: {
 				name: "el-input",
