@@ -124,6 +124,7 @@ function onCommand(name) {
       height: 32px;
       width: 32px;
       border-radius: 32px;
+      object-fit: cover;
     }
 
     .name {

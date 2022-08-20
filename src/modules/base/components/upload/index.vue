@@ -179,6 +179,7 @@ export default defineComponent({
       width: 128px;
       height: 128px;
       display: block;
+      object-fit: cover;
     }
   }
 

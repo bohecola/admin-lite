@@ -97,6 +97,9 @@ export default defineComponent({
 	.el-image {
 		height: 100%;
 		width: 100%;
+		:deep(.el-image__inner) {
+			object-fit: cover;
+		}
 
 		.image-slot {
 			display: flex;
