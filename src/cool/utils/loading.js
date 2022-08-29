@@ -4,7 +4,9 @@ export const Loading = {
   next: null,
 
   async set(list) {
-    await Promise.all(list);
+		try {
+			await Promise.all(list);
+		} catch (e) {}
     this.resolve();
   },
 

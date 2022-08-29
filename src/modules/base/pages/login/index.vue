@@ -72,7 +72,7 @@ const form = reactive({
 });
 
 const { refs, setRefs, router, service } = useCool();
-const { user, menu, app } = useBase();
+const { user, app } = useBase();
 
 const saving = ref(false);
 

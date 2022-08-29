@@ -276,10 +276,10 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
-"@cool-vue/crud@^5.3.7":
-  version "5.3.7"
-  resolved "https://registry.yarnpkg.com/@cool-vue/crud/-/crud-5.3.7.tgz#e7fa5062ca5937f6a89cc10a068863f70f173f6e"
-  integrity sha512-k7MJrRoCqBlRd+hZdSvHy4x3dam8NPZsZPC2VhoUq4BNgGcyy0Gk1XoFfeDllabyen2SA3KKXS7PXFqEwd6GWg==
+"@cool-vue/crud@^5.5.6":
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/@cool-vue/crud/-/crud-5.5.6.tgz#ea781cd2d4dc08184e7225addfd3a976f9d51783"
+  integrity sha512-J1EPy7s8dgW89ZMb3JjMPyruh5FhKsoeni6b6mnCTgOa8WUR1IO9Ny9k8KfGmP5h8Tr6qqyo/82S6g9croVatw==
   dependencies:
     array.prototype.flat "^1.2.4"
     core-js "^3.21.1"
@@ -427,6 +427,11 @@
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.14.tgz#94e175b53623384bff1f354cdb3197a8d63cdbe5"
   integrity sha512-5d2RhCard1nQUC3aHcq/gHzWYO6K0WJmAbjO7mQJgCQKtZpgXxv1rOM6O/dBDhDYYVutk1sciOgNSe+5YyfM8A==
+
+"@types/web-bluetooth@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.15.tgz#d60330046a6ed8a13b4a53df3813c44942ebdf72"
+  integrity sha512-w7hEHXnPMEZ+4nGKl/KDRVpxkwYxYExuHOYXyzIzCDzEZ9ZCGMAewulr9IqJu2LR4N37fcnb1XVeuZ09qgOxhA==
 
 "@unocss/cli@0.44.7":
   version "0.44.7"
@@ -703,7 +708,7 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.37.tgz#8e6adc3f2759af52f0e85863dfb0b711ecc5c702"
   integrity sha512-4rSJemR2NQIo9Klm1vabqWjD8rs/ZaJSzMxkMNeJS6lHiUjjUeYFbooN19NgFjztubEKh3WlZUeOLVdbbUWHsw==
 
-"@vueuse/core@^8.7.5", "@vueuse/core@^8.9.4":
+"@vueuse/core@^8.7.5":
   version "8.9.4"
   resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-8.9.4.tgz#c7db40f19390b3c9f4ff9294a30461497f62ec19"
   integrity sha512-B/Mdj9TK1peFyWaPof+Zf/mP9XuGAngaJZBwPaXBvU3aCTZlx3ltlrFFFyMV4iGBwsjSCeUCgZrtkEj9dS2Y3Q==
@@ -713,15 +718,37 @@
     "@vueuse/shared" "8.9.4"
     vue-demi "*"
 
+"@vueuse/core@^9.1.0":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-9.1.1.tgz#a5c09c33ccee58cfd53bc3ec2d5a0d304155529e"
+  integrity sha512-QfuaNWRDMQcCUwXylCyYhPC3ScS9Tiiz4J0chdwr3vOemBwRToSywq8MP+ZegKYFnbETzRY8G/5zC+ca30wrRQ==
+  dependencies:
+    "@types/web-bluetooth" "^0.0.15"
+    "@vueuse/metadata" "9.1.1"
+    "@vueuse/shared" "9.1.1"
+    vue-demi "*"
+
 "@vueuse/metadata@8.9.4":
   version "8.9.4"
   resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-8.9.4.tgz#a4132db33e4c1b1023636acfa20aa7b37ab3d978"
   integrity sha512-IwSfzH80bnJMzqhaapqJl9JRIiyQU0zsRGEgnxN6jhq7992cPUJIRfV+JHRIZXjYqbwt07E1gTEp0R0zPJ1aqw==
 
+"@vueuse/metadata@9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-9.1.1.tgz#b3fe4b97e62096f7566cd8eb107c503998b2c9a6"
+  integrity sha512-XZ2KtSW+85LLHB/IdGILPAtbIVHasPsAW7aqz3BRMzJdAQWRiM/FGa1OKBwLbXtUw/AmjKYFlZJo7eOFIBXRog==
+
 "@vueuse/shared@8.9.4":
   version "8.9.4"
   resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-8.9.4.tgz#c9741c30ffb666b50d62f0dd80b76119fd47573e"
   integrity sha512-wt+T30c4K6dGRMVqPddexEVLa28YwxW5OFIPmzUHICjphfAuBFTTdDoyqREZNDOFJZ44ARH1WWQNCUK8koJ+Ag==
+  dependencies:
+    vue-demi "*"
+
+"@vueuse/shared@9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-9.1.1.tgz#811f47629e281a19013ae6dcdf11ed3e1e91e023"
+  integrity sha512-c+IfcOYmHiHqoEa3ED1Tbpue5GHmoUmTp8PtO4YbczthtY155Rt6DmWhjxMLXBF1Bcidagxljmp/7xtAzEHXLw==
   dependencies:
     vue-demi "*"
 
@@ -1517,11 +1544,6 @@ kolorist@^1.5.1:
   resolved "https://registry.yarnpkg.com/kolorist/-/kolorist-1.5.1.tgz#c3d66dc4fabde4f6b7faa6efda84c00491f9e52b"
   integrity sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==
 
-loadsh@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/loadsh/-/loadsh-0.0.4.tgz#5314babd12bb13315dde024a4ca70758c5489d2d"
-  integrity sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==
-
 local-pkg@^0.4.1:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/local-pkg/-/local-pkg-0.4.2.tgz#13107310b77e74a0e513147a131a2ba288176c2f"
@@ -1766,10 +1788,19 @@ pinia@^2.0.16:
     "@vue/devtools-api" "^6.1.4"
     vue-demi "*"
 
-postcss@^8.1.10, postcss@^8.4.14:
+postcss@^8.1.10:
   version "8.4.14"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.14.tgz#ee9274d5622b4858c1007a74d76e42e56fd21caf"
   integrity sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==
+  dependencies:
+    nanoid "^3.3.4"
+    picocolors "^1.0.0"
+    source-map-js "^1.0.2"
+
+postcss@^8.4.16:
+  version "8.4.16"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.16.tgz#33a1d675fac39941f5f445db0de4db2b6e01d43c"
+  integrity sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==
   dependencies:
     nanoid "^3.3.4"
     picocolors "^1.0.0"
@@ -1810,10 +1841,10 @@ reusify@^1.0.4:
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
 
-rollup@^2.75.6:
-  version "2.77.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.77.0.tgz#749eaa5ac09b6baa52acc076bc46613eddfd53f4"
-  integrity sha512-vL8xjY4yOQEw79DvyXLijhnhh+R/O9zpF/LEgkCebZFtb6ELeN9H3/2T0r8+mp+fFTBHZ5qGpOpW2ela2zRt3g==
+"rollup@>=2.75.6 <2.77.0 || ~2.77.0":
+  version "2.77.3"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.77.3.tgz#8f00418d3a2740036e15deb653bed1a90ee0cc12"
+  integrity sha512-/qxNTG7FbmefJWoeeYJFbHehJ2HNWnjkAFRKzWN/45eNBBF/r8lo992CwcJXEzyVxs5FmfId+vTSTQDb+bxA+g==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -1885,10 +1916,10 @@ sirv@^2.0.2:
     mrmime "^1.0.0"
     totalist "^3.0.0"
 
-sortablejs@1.10.2:
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.10.2.tgz#6e40364d913f98b85a14f6678f92b5c1221f5290"
-  integrity sha512-YkPGufevysvfwn5rfdlGyrGjt7/CRHwvRPogD/lC+TnvcN29jDpCifKP+rBqf+LRldfXSTh+0CGLcSg0VIxq3A==
+sortablejs@1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.14.0.tgz#6d2e17ccbdb25f464734df621d4f35d4ab35b3d8"
+  integrity sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==
 
 "source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.0.1, source-map-js@^1.0.2:
   version "1.0.2"
@@ -2025,15 +2056,15 @@ update-browserslist-db@^1.0.4:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
-vite@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.2.tgz#2a7b4642c53ae066cf724e7e581d6c1fd24e2c32"
-  integrity sha512-TAqydxW/w0U5AoL5AsD9DApTvGb2iNbGs3sN4u2VdT1GFkQVUfgUldt+t08TZgi23uIauh1TUOQJALduo9GXqw==
+vite@^3.0.6:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.9.tgz#45fac22c2a5290a970f23d66c1aef56a04be8a30"
+  integrity sha512-waYABTM+G6DBTCpYAxvevpG50UOlZuynR0ckTK5PawNVt7ebX6X7wNXHaGIO6wYYFXSM7/WcuFuO2QzhBB6aMw==
   dependencies:
     esbuild "^0.14.47"
-    postcss "^8.4.14"
+    postcss "^8.4.16"
     resolve "^1.22.1"
-    rollup "^2.75.6"
+    rollup ">=2.75.6 <2.77.0 || ~2.77.0"
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -2060,12 +2091,12 @@ vue@^3.2.37:
     "@vue/server-renderer" "3.2.37"
     "@vue/shared" "3.2.37"
 
-vuedraggable@^2.24.3:
-  version "2.24.3"
-  resolved "https://registry.yarnpkg.com/vuedraggable/-/vuedraggable-2.24.3.tgz#43c93849b746a24ce503e123d5b259c701ba0d19"
-  integrity sha512-6/HDXi92GzB+Hcs9fC6PAAozK1RLt1ewPTLjK0anTYguXLAeySDmcnqE8IC0xa7shvSzRjQXq3/+dsZ7ETGF3g==
+vuedraggable@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/vuedraggable/-/vuedraggable-4.1.0.tgz#edece68adb8a4d9e06accff9dfc9040e66852270"
+  integrity sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww==
   dependencies:
-    sortablejs "1.10.2"
+    sortablejs "1.14.0"
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"

@@ -12,7 +12,7 @@
 
 <script>
 import { computed, defineComponent } from "vue";
-import { isNumber } from "lodash";
+import { isNumber } from "lodash-es";
 import { User } from "@element-plus/icons-vue";
 
 export default defineComponent({

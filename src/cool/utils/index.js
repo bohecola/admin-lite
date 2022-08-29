@@ -1,4 +1,4 @@
-import { isArray, orderBy } from 'lodash';
+import { isArray, orderBy } from 'lodash-es';
 import storage from './storage';
 
 // 首字母大写
@@ -275,7 +275,7 @@ export function deepTree(list) {
 
 // 树形转列表
 export function revDeepTree(list = []) {
-	const d = [];
+	const arr = [];
 	let id = 0;
 
 	const deep = (list, parentId) => {
@@ -284,9 +284,11 @@ export function revDeepTree(list = []) {
 				e.id = id++;
 			}
 
-			e.parentId = parentId;
+			if (!e.parentId) {
+				e.parentId = parentId;
+			}
 
-			d.push(e);
+			arr.push(e);
 
 			if (e.children && isArray(e.children)) {
 				deep(e.children, e.id);
@@ -294,9 +296,9 @@ export function revDeepTree(list = []) {
 		});
 	};
 
-	deep(list || [], null);
+	deep(list || [], 0);
 
-	return d;
+	return arr;
 }
 
 export { storage };

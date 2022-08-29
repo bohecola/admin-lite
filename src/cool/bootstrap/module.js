@@ -1,4 +1,4 @@
-import { isFunction, orderBy } from "lodash";
+import { isFunction, orderBy } from "lodash-es";
 import { Data, deepMerge, filename } from "../utils";
 import { service } from "../service";
 import { module } from "../module";

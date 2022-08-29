@@ -2,7 +2,7 @@ import { ElMessage } from "element-plus";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { deepTree, storage } from "/@/cool/utils";
-import { orderBy } from "lodash";
+import { orderBy } from "lodash-es";
 import { service, config } from "/@/cool";
 import { revisePath } from "../utils";
 

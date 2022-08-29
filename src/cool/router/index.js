@@ -2,7 +2,7 @@ import { ElMessage } from "element-plus";
 import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
 import { storage, module } from "/@/cool";
 import { config } from "/@/cool/config";
-import { isArray } from "lodash";
+import { isArray } from "lodash-es";
 import { useBase } from "/$/base";
 import { Loading } from "../utils";
 
@@ -35,15 +35,6 @@ const router = createRouter({
 router.beforeResolve(() => {
   Loading.close();
 });
-
-// 跳转
-router.href = function (path) {
-	const url = import.meta.env.BASE_URL + path;
-
-	if (url != location.pathname) {
-		location.href = url;
-	}
-};
 
 // 添加视图，页面路由
 router.append = function (data) {

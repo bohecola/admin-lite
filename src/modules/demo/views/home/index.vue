@@ -6,6 +6,7 @@
 
 <style lang="scss" scoped>
 .page-home {
+  height: 100%;
   padding: 10px;
   background: #fff;
 }

@@ -117,7 +117,8 @@ const Table = useTable({
     },
     {
       label: "操作",
-      type: "op"
+			type: "op",
+			buttons: ["edit", "delete"]
     }
   ]
 });

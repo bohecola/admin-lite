@@ -2,29 +2,30 @@
 	<div class="menu-check">
 		<el-input v-model="keyword" placeholder="输入关键字进行过滤" />
 
-		<div class="menu-check__scroller scroller1">
-			<el-tree
-				ref="Tree"
-				node-key="id"
-				show-checkbox
-				:data="list"
-				:props="{
-					label: 'name',
-					children: 'children'
-				}"
-				:default-checked-keys="checked"
-				:filter-node-method="filterNode"
-				@check="onCheckChange"
-			/>
+		<div class="menu-check__scroller">
+			<el-scrollbar max-height="200px">
+				<el-tree
+					ref="Tree"
+					node-key="id"
+					show-checkbox
+					:data="list"
+					:props="{
+						label: 'name',
+						children: 'children'
+					}"
+					:filter-node-method="filterNode"
+					@check="onCheckChange"
+				/>
+			</el-scrollbar>
 		</div>
 	</div>
 </template>
 
 <script name="menu-check" setup>
-import { onMounted, ref, watch } from "vue";
-import { ElMessage } from "element-plus";
+import { ref, watch } from "vue";
 import { deepTree } from "/@/cool/utils";
 import { useCool } from "/@/cool";
+import { useUpsert } from "@cool-vue/crud";
 
 const props = defineProps({
 	modelValue: {
@@ -37,28 +38,20 @@ const emit = defineEmits(["update:modelValue"]);
 
 const { service } = useCool();
 
-// 树形列表
-const list = ref([]);
+// el-tree 组件
+const Tree = ref();
 
-// 已选列表
-const checked = ref([]);
+// 树形列表
+const list = ref();
 
 // 搜索关键字
 const keyword = ref("");
 
-// el-tree 组件
-const Tree = ref();
-
 // 刷新列表
-function refresh() {
-	service.menu
-		.list()
-		.then((res) => {
-			list.value = deepTree(res);
-		})
-		.catch((err) => {
-			ElMessage.error(err.message);
-		});
+async function refresh() {
+	return service.menu.list().then((res) => {
+		list.value = deepTree(res);
+	});
 }
 
 // 过滤节点
@@ -77,16 +70,13 @@ watch(keyword, (val) => {
 	Tree.value.filter(val);
 });
 
-// 刷新监听
-watch(
-	() => props.modelValue,
-	(val) => {
-		checked.value = (val || []).filter((e) => Tree.value.getNode(e)?.isLeaf);
+useUpsert({
+	async onOpened() {
+		await refresh();
+		Tree.value.setCheckedKeys(
+			(props.modelValue || []).filter((e) => Tree.value.getNode(e)?.isLeaf)
+		);
 	}
-);
-
-onMounted(() => {
-	refresh();
 });
 </script>
 
@@ -95,8 +85,6 @@ onMounted(() => {
 	&__scroller {
 		border: 1px solid var(--el-border-color);
 		border-radius: 3px;
-		max-height: 200px;
-		box-sizing: border-box;
 		margin-top: 10px;
 		padding: 5px 0;
 	}
