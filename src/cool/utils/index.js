@@ -1,26 +1,26 @@
-import { isArray, orderBy } from 'lodash-es';
-import storage from './storage';
+import { isArray, orderBy } from "lodash-es";
+import storage from "./storage";
 
 // 首字母大写
 export function firstUpperCase(value) {
-  return value.replace(/\b(\w)(\w*)/g, function ($0, $1, $2) {
-    return $1.toUpperCase() + $2;
-  });
+	return value.replace(/\b(\w)(\w*)/g, function ($0, $1, $2) {
+		return $1.toUpperCase() + $2;
+	});
 }
 
 // 获取方法名
 export function getNames(value) {
-  return Object.getOwnPropertyNames(value.constructor.prototype);
+	return Object.getOwnPropertyNames(value.constructor.prototype);
 }
 
 // 深度合并
 export function deepMerge(a, b) {
-  let k;
-  for(k in b) {
-    a[k] = 
-      a[k] && a[k].toString() === '[object Object]' ? deepMerge(a[k], b[k]) : (a[k] = b[k]);
-  }
-  return a;
+	let k;
+	for(k in b) {
+		a[k] = 
+      a[k] && a[k].toString() === "[object Object]" ? deepMerge(a[k], b[k]) : (a[k] = b[k]);
+	}
+	return a;
 }
 
 // 获取地址栏参数
@@ -173,23 +173,23 @@ export function getBrowser() {
 	let prefix = "";
 
 	switch (type) {
-		case "chrome":
-		case "safari":
-		case "mobile":
-			prefix = "webkit";
-			break;
-		case "msie":
-			prefix = "ms";
-			break;
-		case "firefox":
-			prefix = "Moz";
-			break;
-		case "opera":
-			prefix = "O";
-			break;
-		default:
-			prefix = "webkit";
-			break;
+	case "chrome":
+	case "safari":
+	case "mobile":
+		prefix = "webkit";
+		break;
+	case "msie":
+		prefix = "ms";
+		break;
+	case "firefox":
+		prefix = "Moz";
+		break;
+	case "opera":
+		prefix = "O";
+		break;
+	default:
+		prefix = "webkit";
+		break;
 	}
 
 	// 操作平台
@@ -214,6 +214,7 @@ export function getBrowser() {
 	const isIOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 
 	// 浏览器版本
+	// eslint-disable-next-line no-useless-escape
 	const version = (ua.match(/[\s\S]+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1];
 
 	// 是否 PC 端

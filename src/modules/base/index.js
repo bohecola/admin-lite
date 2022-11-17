@@ -1,9 +1,9 @@
 import { useStore } from "./store";
 
 export function useBase() {
-  return {
-    ...useStore()
-  };
+	return {
+		...useStore()
+	};
 }
 
 export * from "./common";

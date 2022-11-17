@@ -1,28 +1,28 @@
 export const Loading = {
-  resolve: null,
+	resolve: null,
 
-  next: null,
+	next: null,
 
-  async set(list) {
+	async set(list) {
 		try {
 			await Promise.all(list);
-		} catch (e) {}
-    this.resolve();
-  },
+		} catch (e) { /* empty */ }
+		this.resolve();
+	},
 
-  async wait() {
-    return this.next;
-  },
+	async wait() {
+		return this.next;
+	},
 
-  close() {
-    const el = document.getElementById("Loading");
+	close() {
+		const el = document.getElementById("Loading");
 
-    if (el) {
-      el.style.display = "none";
-    }
-  }
+		if (el) {
+			el.style.display = "none";
+		}
+	}
 };
 
 Loading.next = new Promise((resolve) => {
-  Loading.resolve = resolve;
+	Loading.resolve = resolve;
 });
