@@ -14,11 +14,11 @@
 </template>
 
 <script setup>
-import Topbar from './components/topbar.vue';
-import Slider from './components/slider.vue';
+import Topbar from "./components/topbar.vue";
+import Slider from "./components/slider.vue";
 import process from "./components/process.vue";
-import views from './components/views.vue';
-import { useBase } from '/$/base';
+import views from "./components/views.vue";
+import { useBase } from "/$/base";
 
 const { app } = useBase();
 
