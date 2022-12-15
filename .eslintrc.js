@@ -36,5 +36,6 @@ module.exports = {
 		],
 		// 未使用的变量检查
 		"no-unused-vars": ["off"],
+		"vue/multi-word-component-names": "off"
 	}
 };
