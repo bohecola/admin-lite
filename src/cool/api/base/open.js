@@ -17,3 +17,15 @@ export const captcha = (params) => request({
 	method: "get",
 	params
 });
+
+export const qrcode = (params) => request({
+	url: "/open/qrcode",
+	method: "get",
+	params
+});
+
+export const qrcodePoll = (params) => request({
+	url: "/open/qrcodePoll",
+	method: "get",
+	params
+});
