@@ -40,6 +40,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
+    "@bohecola/eslint-config": "^0.1.6",
     "@unocss/preset-uno": "^0.44.7",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vitejs/plugin-vue-jsx": "^2.0.0",

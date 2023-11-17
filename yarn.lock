@@ -281,6 +281,22 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
+"@bohecola/eslint-config-basic@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.npmmirror.com/@bohecola/eslint-config-basic/-/eslint-config-basic-0.1.6.tgz#61534b833ce57e0ebcd9b6de0d7f13860931db45"
+  integrity sha512-zJ8LEg+ja4nBWLdkEzl4rCGUz9ukNdslnpa/JSxjCbGmbui8EyaWues3AYo2xy7mmzKzgwC0ROcHhwvargt2zQ==
+  dependencies:
+    eslint-plugin-jsonc "^2.5.0"
+
+"@bohecola/eslint-config@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.npmmirror.com/@bohecola/eslint-config/-/eslint-config-0.1.6.tgz#1efdad62eb0ccc919874a7ee855922d8e921474f"
+  integrity sha512-1N4xL1iu+wz6SWhLk37MAdrnnxsyPlspYNfKl7Ie6AZnQr03twkACrwgQRYSvm3H6WtD4YYdksDiEnVAf8Ge0Q==
+  dependencies:
+    "@bohecola/eslint-config-basic" "0.1.6"
+    eslint-plugin-jsonc "^2.5.0"
+    jsonc-eslint-parser "^2.1.0"
+
 "@cool-vue/crud@^5.5.6":
   version "5.5.6"
   resolved "https://registry.yarnpkg.com/@cool-vue/crud/-/crud-5.5.6.tgz#ea781cd2d4dc08184e7225addfd3a976f9d51783"
@@ -302,6 +318,13 @@
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/@element-plus/icons-vue/-/icons-vue-2.0.6.tgz#8490e7a3193c17515d10c3be0544d800afe6a228"
   integrity sha512-lPpG8hYkjL/Z97DH5Ei6w6o22Z4YdNglWCNYOPcB33JCF2A4wye6HFgSI7hEt9zdLyxlSpiqtgf9XcYU+m5mew==
+
+"@eslint-community/eslint-utils@^4.2.0":
+  version "4.4.0"
+  resolved "https://registry.npmmirror.com/@eslint-community/eslint-utils/-/eslint-utils-4.4.0.tgz#a23514e8fb9af1269d5f7788aa556798d61c6b59"
+  integrity sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==
+  dependencies:
+    eslint-visitor-keys "^3.3.0"
 
 "@eslint/eslintrc@^1.3.3":
   version "1.3.3"
@@ -795,6 +818,11 @@ acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.npmmirror.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"
   integrity sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==
+
+acorn@^8.5.0, acorn@^8.9.0:
+  version "8.11.2"
+  resolved "https://registry.npmmirror.com/acorn/-/acorn-8.11.2.tgz#ca0d78b51895be5390a5903c5b3bdcdaf78ae40b"
+  integrity sha512-nc0Axzp/0FILLEVsm4fNwLCwMttvhEI263QtVPQcbpfZZ3ts0hLsZGOpE6czNlid7CJ9MlyH8reXkpsf3YUY4w==
 
 acorn@^8.8.0:
   version "8.8.1"
@@ -1474,6 +1502,21 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.npmmirror.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
+eslint-compat-utils@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npmmirror.com/eslint-compat-utils/-/eslint-compat-utils-0.1.2.tgz#f45e3b5ced4c746c127cf724fb074cd4e730d653"
+  integrity sha512-Jia4JDldWnFNIru1Ehx1H5s9/yxiRHY/TimCuUc0jNexew3cF1gI6CYZil1ociakfWO3rRqFjl1mskBblB3RYg==
+
+eslint-plugin-jsonc@^2.5.0:
+  version "2.10.0"
+  resolved "https://registry.npmmirror.com/eslint-plugin-jsonc/-/eslint-plugin-jsonc-2.10.0.tgz#4286fd49a79ee3dd86f9c6c61b6f3c65f30b954f"
+  integrity sha512-9d//o6Jyh4s1RxC9fNSt1+MMaFN2ruFdXPG9XZcb/mR2KkfjADYiNL/hbU6W0Cyxfg3tS/XSFuhl5LgtMD8hmw==
+  dependencies:
+    "@eslint-community/eslint-utils" "^4.2.0"
+    eslint-compat-utils "^0.1.2"
+    jsonc-eslint-parser "^2.0.4"
+    natural-compare "^1.4.0"
+
 eslint-plugin-vue@^9.7.0:
   version "9.7.0"
   resolved "https://registry.npmmirror.com/eslint-plugin-vue/-/eslint-plugin-vue-9.7.0.tgz#d391b9864f128ea2d1ee4dabeafb5f7c0cea981f"
@@ -1506,6 +1549,11 @@ eslint-visitor-keys@^2.0.0:
   version "2.1.0"
   resolved "https://registry.npmmirror.com/eslint-visitor-keys/-/eslint-visitor-keys-2.1.0.tgz#f65328259305927392c938ed44eb0a5c9b2bd303"
   integrity sha512-0rSmRBzXgDzIsD6mGdJgevzgezI534Cer5L/vyMX0kHzT/jiB43jRhd9YUlMGYLQy2zprNmoT8qasCGtY+QaKw==
+
+eslint-visitor-keys@^3.0.0, eslint-visitor-keys@^3.4.1:
+  version "3.4.3"
+  resolved "https://registry.npmmirror.com/eslint-visitor-keys/-/eslint-visitor-keys-3.4.3.tgz#0cd72fe8550e3c2eae156a96a4dddcd1c8ac5800"
+  integrity sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==
 
 eslint-visitor-keys@^3.3.0:
   version "3.3.0"
@@ -1556,6 +1604,15 @@ eslint@^8.27.0:
     strip-ansi "^6.0.1"
     strip-json-comments "^3.1.0"
     text-table "^0.2.0"
+
+espree@^9.0.0:
+  version "9.6.1"
+  resolved "https://registry.npmmirror.com/espree/-/espree-9.6.1.tgz#a2a17b8e434690a5432f2f8018ce71d331a48c6f"
+  integrity sha512-oruZaFkjorTpF32kDSI5/75ViwGeZginGGy2NoOSg3Q9bnwlnmDm4HLnkl0RE3n+njDXR037aY1+x58Z/zFdwQ==
+  dependencies:
+    acorn "^8.9.0"
+    acorn-jsx "^5.3.2"
+    eslint-visitor-keys "^3.4.1"
 
 espree@^9.3.1, espree@^9.4.0:
   version "9.4.1"
@@ -2166,6 +2223,16 @@ json5@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.1.tgz#655d50ed1e6f95ad1a3caababd2b0efda10b395c"
   integrity sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==
+
+jsonc-eslint-parser@^2.0.4, jsonc-eslint-parser@^2.1.0:
+  version "2.4.0"
+  resolved "https://registry.npmmirror.com/jsonc-eslint-parser/-/jsonc-eslint-parser-2.4.0.tgz#74ded53f9d716e8d0671bd167bf5391f452d5461"
+  integrity sha512-WYDyuc/uFcGp6YtM2H0uKmUwieOuzeE/5YocFJLnLfclZ4inf3mRn8ZVy1s7Hxji7Jxm6Ss8gqpexD/GlKoGgg==
+  dependencies:
+    acorn "^8.5.0"
+    eslint-visitor-keys "^3.0.0"
+    espree "^9.0.0"
+    semver "^7.3.5"
 
 kind-of@^6.0.2:
   version "6.0.3"

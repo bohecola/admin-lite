@@ -1,0 +1,28 @@
+{
+  // editor
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // eslint
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.run": "onType",
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  // 行尾字符
+  "files.eol": "\n",
+  "path-intellisense.mappings": {
+    "@": "${workspaceFolder}/src"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  // 避免默认的 Vetur 模板验证
+  "vetur.validation.template": false
+}
