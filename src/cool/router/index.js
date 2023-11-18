@@ -107,7 +107,7 @@ async function register(path) {
 		const list = [];
 
 		// 菜单数据
-		menu.routes.find((e) => {
+		menu.routes.forEach((e) => {
 			list.push({
 				...e,
 				isPage: e.viewPath?.includes("/pages")
