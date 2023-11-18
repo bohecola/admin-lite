@@ -22,7 +22,7 @@ const routes = [
 				component: config.app.router.home
 			}
 		]
-	},
+	}
 ];
 
 // 创建路由器
@@ -72,7 +72,7 @@ router.append = function (data) {
 };
 
 // 找路由
-router.find = function(path) {
+router.find = function (path) {
 	return router.getRoutes().find((e) => e.path == path);
 };
 

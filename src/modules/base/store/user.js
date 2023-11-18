@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { storage } from "/@/cool/utils";
 import { service, config, router } from "/@/cool";
- 
+
 // 本地缓存
 const data = storage.info();
 
@@ -22,9 +22,7 @@ export const useUserStore = defineStore("user", function () {
 	// 刷新标识
 	async function refreshToken() {
 		return new Promise((resolve, reject) => {
-			service.open.refreshToken({
-				refreshToken: storage.get("refreshToken")
-			})
+			service.open.refreshToken({ refreshToken: storage.get("refreshToken") })
 				.then((res) => {
 					setToken(res);
 					resolve(res.token);

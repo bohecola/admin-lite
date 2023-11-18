@@ -16,64 +16,60 @@ import { defineComponent, ref, watch } from "vue";
 import { useCool } from "/@/cool";
 
 export default defineComponent({
-  name: "cl-md-editor",
-  components: {
-    MdEditor
-  },
-  props: {
-    modelValue: {
-      type: String,
-      default: ""
-    }
-  },
-  emits: ["update:modelValue", "change"],
-  setup(props, { emit }) {
-    const { service } = useCool();
+	name: "cl-md-editor",
+	components: { MdEditor },
+	props: {
+		modelValue: {
+			type: String,
+			default: ""
+		}
+	},
+	emits: ["update:modelValue", "change"],
+	setup(props, { emit }) {
+		const { service } = useCool();
 
-    // 文本内容
-    const text = ref("");
+		// 文本内容
+		const text = ref("");
 
-    watch(
-      () => props.modelValue,
-      (val) => {
-        text.value = val;
-      },
-      {
-        immediate: true
-      }
-    )
+		watch(
+			() => props.modelValue,
+			(val) => {
+				text.value = val;
+			},
+			{ immediate: true }
+		);
 
-    // 值改变
-    function onChange(v) {
-      emit("update:modelValue", v);
-      emit("change", v);
-    }
+		// 值改变
+		function onChange(v) {
+			emit("update:modelValue", v);
+			emit("change", v);
+		}
 
-    // 图片上传
-    async function onUploadImg(files, cb) {
-      const res = await Promise.all(
-        files.map((file) => {
-          return new Promise((resolve, reject) => {
-            const fd = new FormData();
-            fd.append("file", file);
+		// 图片上传
+		async function onUploadImg(files, cb) {
+			const res = await Promise.all(
+				files.map((file) => {
+					return new Promise((resolve, reject) => {
+						const fd = new FormData();
+						fd.append("file", file);
 
-            service.comm
-              .upload(fd)
-              .then((res) => resolve(res))
-              .catch((err) => reject(err))
-          });
-        })
-      );
+						service.comm
+							.upload(fd)
+							.then((res) => resolve(res))
+							.catch((err) => reject(err));
+					});
+				})
+			);
 
-      cb(res);
-    }
+			cb(res);
+		}
 
-    return {
-      text,
-      onChange,
-      onUploadImg
-    };
-  }
+		return {
+			text,
+			onChange,
+			onUploadImg
+		};
+	}
 });
 </script>
 

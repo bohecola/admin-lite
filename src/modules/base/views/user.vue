@@ -30,60 +30,54 @@ import { useCool } from "/@/cool";
 const { service } = useCool();
 
 // cl-crud 配置
-const Crud = useCrud({
-  service: service.user
-}, (app) => {
-  app.refresh()
+const Crud = useCrud({ service: service.user }, (app) => {
+	app.refresh();
 });
 
 // cl-table 配置
 const Table = useTable({
-  columns: [
-    {
-      type: "selection",
-      width: 60
-    },
-    {
-      prop: "avatar",
-      label: "头像",
-      component: {
-        name: "cl-avatar",
-      }
-    },
-    {
-      prop: "name",
-      label: "姓名",
-      minWidth: 150
-    },
-    {
-      prop: "username",
-      label: "用户名",
-      minWidth: 150
-    },
-    {
-      prop: "nickName",
-      label: "昵称",
-      minWidth: 150
-    },
-    {
-      prop: "roleName",
-      label: "角色",
-      headerAlign: "center",
-      minWidth: 120
-    },
-    {
-      prop: "status",
-      label: "状态",
-      minWidth: 120,
-      component: {
-        name: "cl-switch"
-      }
-    },
-    {
-      prop: "phone",
-      label: "手机号码",
-      minWidth: 150
-    },
+	columns: [
+		{
+			type: "selection",
+			width: 60
+		},
+		{
+			prop: "avatar",
+			label: "头像",
+			component: { name: "cl-avatar" }
+		},
+		{
+			prop: "name",
+			label: "姓名",
+			minWidth: 150
+		},
+		{
+			prop: "username",
+			label: "用户名",
+			minWidth: 150
+		},
+		{
+			prop: "nickName",
+			label: "昵称",
+			minWidth: 150
+		},
+		{
+			prop: "roleName",
+			label: "角色",
+			headerAlign: "center",
+			minWidth: 120
+		},
+		{
+			prop: "status",
+			label: "状态",
+			minWidth: 120,
+			component: { name: "cl-switch" }
+		},
+		{
+			prop: "phone",
+			label: "手机号码",
+			minWidth: 150
+		},
 		{
 			prop: "desc",
 			label: "备注",
@@ -97,55 +91,45 @@ const Table = useTable({
 			minWidth: 160
 		},
 		{
-      label: "操作",
+			label: "操作",
 			type: "op"
 		}
-  ]
-})
+	]
+});
 
 // cl-upsert 配置
 const Upsert = useUpsert({
-  dialog: {
-    width: "800px"
-  },
+	dialog: { width: "800px" },
 
-  items: [
+	items: [
 		{
-      prop: "avatar",
-      label: "头像",
-      component: {
-        name: "cl-upload-custom",
-        props: {
-					text: "选择头像"
-        }
-      }
-    },
+			prop: "avatar",
+			label: "头像",
+			component: {
+				name: "cl-upload-custom",
+				props: { text: "选择头像" }
+			}
+		},
 		{
 			prop: "name",
 			label: "姓名",
 			span: 12,
 			required: true,
-			component: {
-				name: "el-input"
-			}
+			component: { name: "el-input" }
 		},
 		{
 			prop: "nickName",
 			label: "昵称",
 			required: true,
 			span: 12,
-			component: {
-				name: "el-input"
-			}
+			component: { name: "el-input" }
 		},
 		{
 			prop: "username",
 			label: "用户名",
 			required: true,
 			span: 12,
-			component: {
-				name: "el-input"
-			}
+			component: { name: "el-input" }
 		},
 		() => {
 			return {
@@ -155,9 +139,7 @@ const Upsert = useUpsert({
 				required: Upsert.value?.mode == "add",
 				component: {
 					name: "el-input",
-					props: {
-						type: "password"
-					}
+					props: { type: "password" }
 				},
 				rules: [
 					{
@@ -177,7 +159,7 @@ const Upsert = useUpsert({
 				name: "el-select",
 				options: [],
 				props: {
-					multiple: true,
+					"multiple": true,
 					"multiple-limit": 3
 				}
 			}
@@ -186,17 +168,13 @@ const Upsert = useUpsert({
 			prop: "phone",
 			label: "手机号码",
 			span: 12,
-			component: {
-				name: "el-input"
-			}
+			component: { name: "el-input" }
 		},
 		{
 			prop: "email",
 			label: "邮箱",
 			span: 12,
-			component: {
-				name: "el-input"
-			}
+			component: { name: "el-input" }
 		},
 		{
 			prop: "desc",
@@ -227,7 +205,7 @@ const Upsert = useUpsert({
 				]
 			}
 		}
-  ],
+	],
 
 	async onOpen() {
 		const list = await service.role.list();

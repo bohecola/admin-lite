@@ -18,9 +18,7 @@ import { User } from "@element-plus/icons-vue";
 export default defineComponent({
 	name: "cl-avatar",
 
-	components: {
-		User
-	},
+	components: { User },
 
 	props: {
 		modelValue: String,
@@ -54,9 +52,7 @@ export default defineComponent({
 			};
 		});
 
-		return {
-			style
-		};
+		return { style };
 	}
 });
 </script>

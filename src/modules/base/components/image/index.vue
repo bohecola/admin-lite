@@ -34,9 +34,7 @@ import { PictureFilled } from "@element-plus/icons-vue";
 export default defineComponent({
 	name: "cl-image",
 
-	components: {
-		PictureFilled
-	},
+	components: { PictureFilled },
 
 	props: {
 		modelValue: [String, Array],

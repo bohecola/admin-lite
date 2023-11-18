@@ -40,26 +40,26 @@ const loading = ref(false);
 
 // 保存
 async function save() {
-  const { avatar, nickName, password } = form;
+	const { avatar, nickName, password } = form;
 
-  loading.value = true;
+	loading.value = true;
 
-  await service.comm
-    .personUpdate({
-      avatar,
-      nickName,
-      password
-    })
-    .then(() => {
-      form.password = "";
-      ElMessage.success("修改成功");
-      user.get();
-    })
-    .catch((err) => {
-      ElMessage.error(err.message);
-    });
+	await service.comm
+		.personUpdate({
+			avatar,
+			nickName,
+			password
+		})
+		.then(() => {
+			form.password = "";
+			ElMessage.success("修改成功");
+			user.get();
+		})
+		.catch((err) => {
+			ElMessage.error(err.message);
+		});
 
-  loading.value = false;
+	loading.value = false;
 }
 
 </script>

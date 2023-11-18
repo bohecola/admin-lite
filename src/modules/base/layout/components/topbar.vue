@@ -1,8 +1,8 @@
 <template>
   <div class="app-topbar">
-    <div 
+    <div
       :class="['app-topbar__collapse', {
-        unfold: !app.isFold 
+        unfold: !app.isFold
       }]"
       @click="app.fold()"
     >
@@ -48,15 +48,15 @@ const { user, app } = useBase();
 
 // 跳转
 async function onCommand(name) {
-  switch (name) {
-    case "my":
-      router.push("/my/info");
-      break;
-    case "exit":
-      // await service.comm.logout()
-      user.logout();
-      break;
-  }
+	switch (name) {
+		case "my":
+			router.push("/my/info");
+			break;
+		case "exit":
+			// await service.comm.logout()
+			user.logout();
+			break;
+	}
 }
 </script>
 

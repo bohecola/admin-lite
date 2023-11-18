@@ -17,7 +17,7 @@ export default {
    */
 	info() {
 		const d = {};
-    
+
 		store.each(function (value, key) {
 			d[key] = value;
 		});

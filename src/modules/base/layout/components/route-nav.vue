@@ -48,7 +48,8 @@ const list = computed(() => {
 		}
 	}
 
-	return flattenDeep(menu.group).map(deep).filter(Boolean);
+	return flattenDeep(menu.group).map(deep)
+		.filter(Boolean);
 });
 
 // 最后一个节点名称

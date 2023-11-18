@@ -17,134 +17,132 @@ import { useBase } from "/$/base";
 import { useCool } from "/@/cool";
 
 export default defineComponent({
-  name: "app-slider",
+	name: "app-slider",
 
-  components: {
-    MenuNav: {
-      setup() {
-        const { router, route } = useCool();
-        const { menu } = useBase();
+	components: {
+		MenuNav: {
+			setup() {
+				const { router, route } = useCool();
+				const { menu } = useBase();
 
-        // 是否可见
-        const visible = ref(true);
+				// 是否可见
+				const visible = ref(true);
 
-        // 页面跳转
-        function toView(url) {
-          if (url !== route.path) {
-            router.push(url);
-          }
-        }
+				// 页面跳转
+				function toView(url) {
+					if (url !== route.path) {
+						router.push(url);
+					}
+				}
 
-        // 刷新菜单
-        function refresh() {
-          visible.value = false;
+				// 刷新菜单
+				function refresh() {
+					visible.value = false;
 
-          setTimeout(() => {
-            visible.value = true;
-          }, 0);
-        }
+					setTimeout(() => {
+						visible.value = true;
+					}, 0);
+				}
 
-        // 监听菜单变化
-        watch(menu.list, refresh);
+				// 监听菜单变化
+				watch(menu.list, refresh);
 
-        return {
-          route,
-          visible,
-          toView,
-          refresh,
-          menu
-        };
-      },
-      render(ctx) {
-        const { app } = useBase();
+				return {
+					route,
+					visible,
+					toView,
+					refresh,
+					menu
+				};
+			},
+			render(ctx) {
+				const { app } = useBase();
 
-        // 设置子菜单
-        function deepMenu(list, index) {
-          return list
-            .filter((e) => e.isShow)
-            .map((e) => {
-              let html = null;
+				// 设置子菜单
+				function deepMenu(list, index) {
+					return list
+						.filter((e) => e.isShow)
+						.map((e) => {
+							let html = null;
 
-              if (e.type == 0) {
-                html = h(
-                  <el-sub-menu></el-sub-menu>,
-                  {
-                    index: String(e.id),
-                    key: e.id,
-                    popperClass: "app-slider__menu"
-                  },
-                  {
-                    title() {
-                      return (
-                        <div class="wrap">
-                          <el-icon>
-                            {h(resolveComponent(e.icon))}
-                          </el-icon>
-                          <span v-show={!app.isFold || index != 1}>
-                            {e.name}
-                          </span>
-                        </div>
-                      );
-                    },
-                    default() {
-                      return deepMenu(e.children, index + 1);
-                    }
-                  }
-                );
-              } else {
-                html = h(
-                  <el-menu-item></el-menu-item>,
-                  {
-                    index: e.path,
-                    key: e.id
-                  },
-                  {
-                    default() {
-                      return (
-                        <div class="wrap">
-                          <el-icon>
-                            {h(resolveComponent(e.icon))}
-                          </el-icon>
-                          <span v-show={!app.isFold || index !=1}>
-                            {e.name}
-                          </span>
-                        </div>
-                      );
-                    }
-                  }
-                );
-              }
+							if (e.type == 0) {
+								html = h(
+									<el-sub-menu></el-sub-menu>,
+									{
+										index: String(e.id),
+										key: e.id,
+										popperClass: "app-slider__menu"
+									},
+									{
+										title() {
+											return (
+												<div class="wrap">
+													<el-icon>
+														{h(resolveComponent(e.icon))}
+													</el-icon>
+													<span v-show={!app.isFold || index != 1}>
+														{e.name}
+													</span>
+												</div>
+											);
+										},
+										default() {
+											return deepMenu(e.children, index + 1);
+										}
+									}
+								);
+							} else {
+								html = h(
+									<el-menu-item></el-menu-item>,
+									{
+										index: e.path,
+										key: e.id
+									},
+									{
+										default() {
+											return (
+												<div class="wrap">
+													<el-icon>
+														{h(resolveComponent(e.icon))}
+													</el-icon>
+													<span v-show={!app.isFold || index != 1}>
+														{e.name}
+													</span>
+												</div>
+											);
+										}
+									}
+								);
+							}
 
-              return html;
-            });
-        }
+							return html;
+						});
+				}
 
-        const children = deepMenu(ctx.menu.list, 1);
+				const children = deepMenu(ctx.menu.list, 1);
 
-        return (
-          ctx.visible && (
-            <div class="app-slider__menu">
-              <el-menu
-                default-active={ctx.route.path}
-                background-color="transparent"
-                collapse-transition={false}
-                collapse={app.browser.isMini ? false : app.isFold}
-                onSelect={ctx.toView}
-              >
-                {children}
-              </el-menu>
-            </div>
-          )
-        );
-      }
-    }
-  },
+				return (
+					ctx.visible && (
+						<div class="app-slider__menu">
+							<el-menu
+								default-active={ctx.route.path}
+								background-color="transparent"
+								collapse-transition={false}
+								collapse={app.browser.isMini ? false : app.isFold}
+								onSelect={ctx.toView}
+							>
+								{children}
+							</el-menu>
+						</div>
+					)
+				);
+			}
+		}
+	},
 
-  setup() {
-    return {
-      ...useBase()
-    }
-  }
+	setup() {
+		return { ...useBase() };
+	}
 });
 </script>
 
@@ -209,7 +207,7 @@ export default defineComponent({
         &.is-active,
         &:hover {
           background-color: #4165d7 !important;
-          
+
           .el-icon,
           span {
             color: #fff;
@@ -233,7 +231,7 @@ export default defineComponent({
             font-size: 16px;
             margin-right: 0;
           }
-        }  
+        }
 
         span {
           font-size: 12px;

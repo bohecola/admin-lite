@@ -9,9 +9,7 @@ export default () => {
 		views: [
 			{
 				path: "/my/info",
-				meta: {
-					label: "个人中心"
-				},
+				meta: { label: "个人中心" },
 				component: () => import("./views/info.vue")
 			}
 		],
@@ -22,9 +20,7 @@ export default () => {
 			},
 			{
 				path: "/404",
-				meta: {
-					process: false
-				},
+				meta: { process: false },
 				component: () => import("./pages/error-page/404.vue")
 			}
 		],
@@ -53,9 +49,7 @@ export default () => {
 				await menu.get();
 			});
 
-			return {
-				hasToken
-			};
+			return { hasToken };
 		}
 	};
 };

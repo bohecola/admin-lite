@@ -49,9 +49,7 @@ watch(
 	(val) => {
 		value.value = (val || "").replace(/(modules\/|cool\/)/g, "").split("/");
 	},
-	{
-		immediate: true
-	}
+	{ immediate: true }
 );
 </script>
 

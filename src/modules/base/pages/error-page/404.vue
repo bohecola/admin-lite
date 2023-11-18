@@ -23,7 +23,7 @@ const { router } = useCool();
     width: 100vw;
     height: 100vh;
     background: #f7f7f7;
-    
+
     .title {
       margin-right: 20px;
       text-align: center;

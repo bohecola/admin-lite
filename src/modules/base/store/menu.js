@@ -52,14 +52,14 @@ export const useMenuStore = defineStore("menu", function () {
 							...e,
 							path: revisePath(e.router || (String(e.id))),
 							isShow: e.isShow === undefined ? true : e.isShow,
-							meta: { 
+							meta: {
 								label: e.name,
 								keepAlive: e.keepAlive || 0
 							},
 							children: []
 						};
 					});
-        
+
 				// 设置菜单组
 				setGroup(deepTree(list));
 

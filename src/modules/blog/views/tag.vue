@@ -30,59 +30,53 @@ const { service } = useCool();
 
 // cl-crud 配置
 const Crud = useCrud({ service: service.tag }, (app) => {
-  app.refresh();
+	app.refresh();
 });
 
 // cl-table 配置
 const Table = useTable({
-  columns: [
-    {
-      type: "selection",
-      width: 60
-    },
-    {
-      prop: "name",
-      label: "标签名",
-      minWidth: 150
-    },
-    {
-      prop: "createdAt",
-      label: "创建时间",
-      sortable: "custom",
-      minWidth: 160
-    },
-    {
-      label: "操作",
-      type: "op"
-    }
-  ]
+	columns: [
+		{
+			type: "selection",
+			width: 60
+		},
+		{
+			prop: "name",
+			label: "标签名",
+			minWidth: 150
+		},
+		{
+			prop: "createdAt",
+			label: "创建时间",
+			sortable: "custom",
+			minWidth: 160
+		},
+		{
+			label: "操作",
+			type: "op"
+		}
+	]
 });
 
 // cl-upsert 配置
 const Upsert = useUpsert({
-  dialog: {
-    width: "600px"
-  },
-  items: [
-    {
-      prop: "name",
-      label: "标签名",
-      required: true,
-      span: 12,
-      component: {
-        name: "el-input"
-      }
-    },
-    {
-      prop: "slug",
-      label: "URL-Slug",
-      required: true,
-      span: 12,
-      component: {
-        name: "el-input"
-      }
-    }
-  ]
+	dialog: { width: "600px" },
+	items: [
+		{
+			prop: "name",
+			label: "标签名",
+			required: true,
+			span: 12,
+			component: { name: "el-input" }
+		},
+		{
+			prop: "slug",
+			label: "URL-Slug",
+			required: true,
+			span: 12,
+			component: { name: "el-input" }
+		}
+	]
 });
 
 </script>

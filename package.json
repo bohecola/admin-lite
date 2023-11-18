@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --port 8080",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fix": "eslint --fix --ext .js,.vue ./src"
   },
   "husky": {
     "hooks": {

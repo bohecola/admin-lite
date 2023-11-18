@@ -47,9 +47,7 @@ watch(
 	(val) => {
 		value.value = val ? val.split(",").map((e) => e.split(":")) : [];
 	},
-	{
-		immediate: true
-	}
+	{ immediate: true }
 );
 
 onMounted(() => {

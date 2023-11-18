@@ -4,9 +4,7 @@ import { service } from "../service";
 import { module } from "../module";
 
 // 扫描文件
-const files = import.meta.glob("/src/modules/*/{config.js,service/**,directives/**}", {
-	eager: true
-});
+const files = import.meta.glob("/src/modules/*/{config.js,service/**,directives/**}", { eager: true });
 
 // 模块列表
 module.list = Data.get("modules", []);
@@ -35,18 +33,18 @@ for(const i in files) {
 
 	switch (action) {
 	// 配置参数
-	case "config.js":
-		d.value = v;
-		break;
-    
+		case "config.js":
+			d.value = v;
+			break;
+
 		// 请求服务
-	case "service":
-		break;
-    
+		case "service":
+			break;
+
 		// 指令
-	case "directives":
-		d.directives?.push({ name: fname, value: v });
-		break;
+		case "directives":
+			d.directives?.push({ name: fname, value: v });
+			break;
 	}
 
 	if (!m) {
@@ -97,4 +95,3 @@ export function createModule(app) {
 		}
 	};
 }
-

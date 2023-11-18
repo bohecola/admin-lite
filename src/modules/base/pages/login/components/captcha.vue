@@ -17,27 +17,25 @@ const { service } = useCool();
 const svg = ref("");
 
 function refresh() {
-  service.open
-    .captcha({ 
-      height: 40,
-      width: 150
-    })
-    .then(({ data }) => {
-      svg.value = data;
-      emit("change", svg);
-    })
-    .catch((err) => {
-      ElMessage.error(err.message);
-    });
+	service.open
+		.captcha({
+			height: 40,
+			width: 150
+		})
+		.then(({ data }) => {
+			svg.value = data;
+			emit("change", svg);
+		})
+		.catch((err) => {
+			ElMessage.error(err.message);
+		});
 }
 
 onMounted(() => {
-  refresh();
+	refresh();
 });
 
-defineExpose({
-  refresh
-});
+defineExpose({ refresh });
 </script>
 
 <style lang="scss" scoped>

@@ -16,6 +16,7 @@ export function createLink(url, id) {
 	}
 
 	setTimeout(() => {
-		document.getElementsByTagName("head").item(0)?.appendChild(link);
+		document.getElementsByTagName("head").item(0)
+			?.appendChild(link);
 	}, 0);
 }

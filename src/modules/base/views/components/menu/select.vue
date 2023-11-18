@@ -70,9 +70,7 @@ watch(
 	(val) => {
 		value.value = val ? Number(val) : val;
 	},
-	{
-		immediate: true
-	}
+	{ immediate: true }
 );
 
 onMounted(function () {

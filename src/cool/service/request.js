@@ -7,9 +7,7 @@ import { storage } from "/@/cool/utils";
 import { useBase } from "/$/base";
 import { router } from "../router";
 
-NProgress.configure({ 
-	showSpinner: false 
-});
+NProgress.configure({ showSpinner: false });
 
 // 请求队列
 let requests = [];
@@ -110,10 +108,10 @@ service.interceptors.response.use(
 		}
 
 		switch (code) {
-		case 1000:
-			return data;
-		default:
-			return Promise.reject({ code, message });
+			case 1000:
+				return data;
+			default:
+				return Promise.reject({ code, message });
 		}
 	},
 
@@ -123,7 +121,7 @@ service.interceptors.response.use(
 		if (error.response) {
 			const { status, config } = error.response;
 			const { user } = useBase();
-      
+
 			if (status == 401) {
 				user.logout();
 			}
@@ -132,12 +130,12 @@ service.interceptors.response.use(
 				ElMessage.error(`${config.url} ${status}`);
 			} else {
 				switch (status) {
-				case 403:
-					break;
-				case 500:
-					break;
-				case 502:
-					break;
+					case 403:
+						break;
+					case 500:
+						break;
+					case 502:
+						break;
 				}
 			}
 		}

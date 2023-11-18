@@ -9,7 +9,5 @@ const ElIcons = {
 };
 
 export default () => {
-	return {
-		install: ElIcons.install
-	};
+	return { install: ElIcons.install };
 };

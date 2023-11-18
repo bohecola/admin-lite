@@ -38,114 +38,109 @@ import { useBase } from "/$/base";
 import { ElMessage } from "element-plus";
 
 export default defineComponent({
-  name: "cl-upload-custom",
-  props: {
-    modelValue: {
-      type: [String, Array],
-      default: () => []
-    }
-  },
-  emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const { service } = useCool();
+	name: "cl-upload-custom",
+	props: {
+		modelValue: {
+			type: [String, Array],
+			default: () => []
+		}
+	},
+	emits: ["update:modelValue"],
+	setup(props, { emit }) {
+		const { service } = useCool();
 
-    // 缓存
-    const { user } = useBase();
+		// 缓存
+		const { user } = useBase();
 
-    // el-upload
-    const Upload = ref();
+		// el-upload
+		const Upload = ref();
 
-    // 图片大小限制
-    const limitSize = props.limitSize || 5;
+		// 图片大小限制
+		const limitSize = props.limitSize || 5;
 
-    // 图片回显
-    const imageUrl = ref("");
+		// 图片回显
+		const imageUrl = ref("");
 
-    // 请求头
-    const headers = computed(() => {
-      return {
-        Authorization: user.token
-      };
-    });
+		// 请求头
+		const headers = computed(() => {
+			return { Authorization: user.token };
+		});
 
-    // 预览
-    const pv = reactive({
-      visible: false,
-      url: ""
-    });
+		// 预览
+		const pv = reactive({
+			visible: false,
+			url: ""
+		});
 
-    // 上传前
-    function beforeUpload(file, item) {
-      if (file.size / 1024 / 1024 >= limitSize) {
-        ElMessage.error(`上传文件大小不能超过 ${limitSize}MB!`);
-        return false;
-      }
-      return true;
-    }
+		// 上传前
+		function beforeUpload(file, item) {
+			if (file.size / 1024 / 1024 >= limitSize) {
+				ElMessage.error(`上传文件大小不能超过 ${limitSize}MB!`);
+				return false;
+			}
+			return true;
+		}
 
-    // 移除
-    function remove() {
-      imageUrl.value = "";
-      update();
-      console.log(imageUrl.value, props.modelValue, 2222);
-    }
+		// 移除
+		function remove() {
+			imageUrl.value = "";
+			update();
+			console.log(imageUrl.value, props.modelValue, 2222);
+		}
 
-    // 预览
-    function preview() {
-        pv.visible = true;
-        pv.url = imageUrl.value;
-    }
+		// 预览
+		function preview() {
+			pv.visible = true;
+			pv.url = imageUrl.value;
+		}
 
-    // 文件上传请求
-    async function httpRequest(req) {
+		// 文件上传请求
+		async function httpRequest(req) {
+			const fd = new FormData();
 
-      const fd = new FormData();
+			// 文件名
+			fd.append("key", req.file.name);
 
-      // 文件名
-      fd.append("key", req.file.name)
+			// 文件
+			fd.append("file", req.file);
 
-      // 文件
-      fd.append("file", req.file);
+			service.comm
+				.upload(fd)
+				.then((res) => {
+					imageUrl.value = res;
+					update();
+				})
+				.catch((err) => {
+					ElMessage.error(err);
+				});
+		}
 
-      service.comm
-        .upload(fd)
-        .then((res) => {
-          imageUrl.value = res;
-          update();
-        })
-        .catch((err) => {
-          ElMessage.error(err);
-        });
-    }
+		// 更新
+		function update() {
+			emit("update:modelValue", imageUrl.value);
+		}
 
-    // 更新
-    function update() {
-      emit("update:modelValue", imageUrl.value)
-    }
+		// 获取
+		watch(
+			() => props.modelValue,
+			(val) => {
+				if (typeof val === "string") {
+					imageUrl.value = val;
+				}
+			},
+			{ immediate: true }
+		);
 
-    // 获取
-    watch(
-      () => props.modelValue,
-      (val) => {
-        if (typeof val === "string") {
-          imageUrl.value = val;
-        }
-      },
-      {
-        immediate: true
-      }
-    );
-
-    return {
-      imageUrl,
-      pv,
-      headers,
-      beforeUpload,
-      remove,
-      preview,
-      httpRequest
-    };
-  }
+		return {
+			imageUrl,
+			pv,
+			headers,
+			beforeUpload,
+			remove,
+			preview,
+			httpRequest
+		};
+	}
 });
 </script>
 

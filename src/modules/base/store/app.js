@@ -5,9 +5,7 @@ import { deepMerge, getBrowser, storage } from "/@/cool/utils";
 
 export const useAppStore = defineStore("app", function () {
 	// 基本信息
-	const info = ref({
-		...config.app
-	});
+	const info = ref({ ...config.app });
 
 	// 浏览器信息
 	const browser = ref(getBrowser());
@@ -16,9 +14,7 @@ export const useAppStore = defineStore("app", function () {
 	const isFold = ref(browser.value.isMini || false);
 
 	// 事件
-	const events = reactive({
-		hasToken: []
-	});
+	const events = reactive({ hasToken: [] });
 
 	// 折叠
 	function fold(v) {
