@@ -22,3 +22,16 @@ export const upload = (data) => request({
 	method: "post",
 	data
 });
+
+export const uploadChunk = (data) => request({
+	url: "/upload/chunk",
+	header: { "Content-Type": "multipart/form-data" },
+	method: "post",
+	data
+});
+
+export const mergeChunk = (data) => request({
+	url: "/upload/merge",
+	method: "post",
+	data
+});
