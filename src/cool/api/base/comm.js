@@ -23,9 +23,10 @@ export const upload = (data) => request({
 	data
 });
 
-export const uploadChunk = (data) => request({
+export const uploadChunk = (data, onUploadProgress) => request({
 	url: "/upload/chunk",
 	header: { "Content-Type": "multipart/form-data" },
+	onUploadProgress,
 	method: "post",
 	data
 });
