@@ -23,16 +23,24 @@ export const upload = (data) => request({
 	data
 });
 
-export const uploadChunk = (data, onUploadProgress) => request({
+export const uploadChunk = (data, { onUploadProgress, cancelToken }) => request({
 	url: "/upload/chunk",
 	header: { "Content-Type": "multipart/form-data" },
 	onUploadProgress,
+	cancelToken,
+	timeout: 1000 * 60 * 5,
 	method: "post",
 	data
 });
 
 export const mergeChunk = (data) => request({
 	url: "/upload/merge",
+	method: "post",
+	data
+});
+
+export const uploadVerify = (data) => request({
+	url: "/upload/verify",
 	method: "post",
 	data
 });
