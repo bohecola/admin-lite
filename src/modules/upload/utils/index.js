@@ -52,3 +52,34 @@ export function changePercentage(chunks, value) {
 		}
 	});
 }
+
+// 并发控制器
+export function taskControll(list, max = 4, cb, isAbort) {
+	let runIdx = 0;
+	let finished = 0;
+
+	const run = () => {
+		while(max && runIdx < list.length) {
+			// 中断
+			if (isAbort.value) return;
+
+			const task = list[runIdx];
+			runIdx++;
+
+			if (task) {
+				max--;
+				task().finally(() => {
+					max++;
+					finished++;
+
+					if (finished === list.length) {
+						cb();
+					} else {
+						run();
+					}
+				});
+			}
+		}
+	};
+	run();
+}

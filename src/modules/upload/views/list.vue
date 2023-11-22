@@ -4,29 +4,24 @@ import { ElMessage } from "element-plus";
 import { isEmpty, floor } from "lodash-es";
 import axios from "axios";
 import { useCool } from "/@/cool";
-import { handleFileSlice, calculateHash, changePercentage, get100 } from "../utils";
-
-// 文件切片大小 2M
-const defaultChunkSize = 1024 * 1024 * 2;
+import { handleFileSlice, calculateHash, changePercentage, taskControll, get100 } from "../utils";
 
 // 服务
 const { service } = useCool();
 
+// 文件切片大小 2M
+const defaultChunkSize = 1024 * 1024 * 2;
 // 上传的文件
 const uploadFile = ref(null);
-
 // 切片数组
 const chunks = ref([]);
-
 // 文件哈希
 const hash = ref("");
-
 // 取消请求源 数组
 const sources = ref([]);
 
 // 暂停
 const pasue = ref(false);
-
 // 预览地址
 const url = ref("");
 
@@ -68,8 +63,7 @@ async function startUpload() {
 			chunks.value.forEach((chunk) => {
 				if (uploadedList.includes(chunk.hash)) {
 					// 有些切片上传上去了，但是请求取消了，导致上传进度监听没有被及时触发
-					// 从而导致切片上传进度没有更新，例如最终进度可能停留在73%
-					// 但是实际上切片已经上传完成了
+					// 从而导致切片上传进度没有更新，例如最终进度可能停留在73%，但实际切片已上传完成了
 					// 所以这里需要将已上传的切片进度重置为100%，保证上传进度的准确性
 					chunk.percentage = get100();
 				} else {
@@ -88,21 +82,24 @@ async function startUpload() {
 			promises = getChunkReqs(chunks.value);
 		}
 
-		// 全部上传
-		await Promise.all(promises);
+		// 全部上传（会阻塞网络）
+		// await Promise.all(promises);
 
-		// 合并文件
-		const { url: fileURL } = await service.comm.mergeChunk({
-			fileHash: hash.value,
-			fileName: uploadFile.value.name,
-			splitSize: defaultChunkSize,
-			total: chunks.value.length
-		});
+		// 并发控制上传
+		taskControll(promises, 4, async () => {
+			// 合并文件
+			const { url: fileURL } = await service.comm.mergeChunk({
+				fileHash: hash.value,
+				fileName: uploadFile.value.name,
+				splitSize: defaultChunkSize,
+				total: chunks.value.length
+			});
 
-		url.value = fileURL;
+			url.value = fileURL;
+
+			ElMessage.success("上传成功");
+		}, pasue);
 	}
-
-	ElMessage.success("上传成功");
 }
 
 // 选择文件
@@ -188,12 +185,11 @@ function getChunkReqs(chunks) {
 
 		// 取消令牌源
 		const source = axios.CancelToken.source();
-
 		// 收集取消令牌源
 		sources.value.push(source);
 
 		// 上传请求
-		return service.comm.uploadChunk(formData, {
+		return () => service.comm.uploadChunk(formData, {
 			// 取消令牌
 			cancelToken: source.token,
 			// 监听上传进度
@@ -267,7 +263,9 @@ function resetState() {
 
 <template>
   <div class="page-test">
-    <h1 class="mb-2">切片上传 | 断点续传 | 文件秒传 </h1>
+    <span class="inline-block px-3 py-2 mt-2 mb-3 text-sm bg-slate-200">
+      切片上传 ｜ 断点续传 ｜ 秒传 ｜ 并发请求控制
+    </span>
 
     <input
       class="block mb-3"
@@ -285,7 +283,7 @@ function resetState() {
 
       <button
         class="px-2 cursor-pointer disabled:cursor-not-allowed"
-        :disabled="!Boolean(hash)"
+        :disabled="(totalProgress < 100 && totalProgress > 0) || !Boolean(hash)"
         @click="startUpload">
         上传
       </button>
