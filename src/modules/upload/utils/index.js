@@ -54,7 +54,7 @@ export function changePercentage(chunks, value) {
 }
 
 // 并发控制器
-export function taskControll(list, max = 4, cb, isAbort) {
+export function taskController(list, max = 4, cb, isAbort) {
 	let runIdx = 0;
 	let finished = 0;
 

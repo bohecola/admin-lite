@@ -4,7 +4,7 @@ import { ElMessage } from "element-plus";
 import { isEmpty, floor } from "lodash-es";
 import axios from "axios";
 import { useCool } from "/@/cool";
-import { handleFileSlice, calculateHash, changePercentage, taskControll, get100 } from "../utils";
+import { handleFileSlice, calculateHash, changePercentage, taskController, get100 } from "../utils";
 
 // 服务
 const { service } = useCool();
@@ -55,6 +55,7 @@ async function startUpload() {
 	if (!shouldUpload) {
 		changePercentage(chunks.value, get100());
 		url.value = fileURL;
+		ElMessage.success("上传成功");
 	} else {
 		// 存在上传的切片
 		if (!isEmpty(uploadedList)) {
@@ -86,7 +87,7 @@ async function startUpload() {
 		// await Promise.all(promises);
 
 		// 并发控制上传
-		taskControll(promises, 4, async () => {
+		taskController(promises, 4, async () => {
 			// 合并文件
 			const { url: fileURL } = await service.comm.mergeChunk({
 				fileHash: hash.value,
