@@ -5,7 +5,6 @@ import { ElMessage } from "element-plus";
 import { isDev, config } from "/@/cool";
 import { storage } from "/@/cool/utils";
 import { useBase } from "/$/base";
-import { router } from "../router";
 
 NProgress.configure({ showSpinner: false });
 
@@ -17,7 +16,7 @@ let isRefreshing = false;
 
 const baseURL = import.meta.env.MODE === "development"
 	? "http://localhost:3000/api/admin"
-	: "https://canday.site:3000/api/admin";
+	: "";
 
 const service = axios.create({
 	baseURL: baseURL,
